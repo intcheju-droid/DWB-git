@@ -10,7 +10,7 @@ const path = require('path');
 const SITE = {
   name: '더불어 함께',
   slogan: '장애인 등 사회적약자의 보편적 언론 권리를 실현하는 인터넷신문',
-  url: 'https://example.github.io/dulbeo-hamkke', // GitHub Pages 주소로 교체
+  url: 'https://intcheju-droid.github.io/DWB-git', // GitHub Pages 주소로 교체
   email: 'intcheju@gmail.com',
   register: '(등록 후 기재)',
   publisher: '(성명)'
