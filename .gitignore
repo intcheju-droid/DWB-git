@@ -1,0 +1,10 @@
+# 빌드 결과물 — GitHub Actions가 배포 때마다 새로 생성하므로 저장소에 두지 않음
+public/
+
+# Node.js 관련 (로컬 미리 보기 중 생길 수 있음)
+node_modules/
+
+# 운영체제 잡동사니
+Thumbs.db
+desktop.ini
+.DS_Store
