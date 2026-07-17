@@ -26,22 +26,27 @@ function setEasy(on){
 /* 소리로 듣기 (브라우저 내장 음성합성) */
 var ttsQueue = [], ttsIdx = 0, ttsActive = false;
 function ttsCollect(){
-  var sel = document.documentElement.classList.contains('easy-on') ? '.easy' : 'article.normal';
+  var easyMode = document.documentElement.classList.contains('easy-on');
+  var sel = easyMode ? '.easy' : 'article.normal';
   var rootEl = document.querySelector(sel);
   if(!rootEl) return [];
   var root = rootEl.cloneNode(true);
   root.querySelectorAll('figure, .notice, table').forEach(function(el){ el.remove(); });
   var parts = [];
-  var t = document.querySelector('h1'); if(t) parts.push(t.innerText);
+  if(!easyMode){
+    var t = document.querySelector('h1'); if(t) parts.push(t.innerText);
+  }
   root.querySelectorAll('h2, h3, p, dt, dd').forEach(function(el){
     var s = el.innerText.trim(); if(s) parts.push(s);
   });
-  var box = document.querySelector(sel === '.easy' ? '' : '.infobox');
-  if(box){
-    box.querySelectorAll('tr').forEach(function(tr){
-      var th = tr.querySelector('th'), td = tr.querySelector('td');
-      if(th && td) parts.push(th.innerText.trim() + ': ' + td.innerText.trim());
-    });
+  if(!easyMode){
+    var box = document.querySelector('.infobox');
+    if(box){
+      box.querySelectorAll('tr').forEach(function(tr){
+        var th = tr.querySelector('th'), td = tr.querySelector('td');
+        if(th && td) parts.push(th.innerText.trim() + ': ' + td.innerText.trim());
+      });
+    }
   }
   return parts;
 }
@@ -61,7 +66,9 @@ function ttsToggle(){
     btn.textContent = '이 브라우저는 음성을 지원하지 않아요'; btn.disabled = true; return;
   }
   if(!ttsActive){
-    ttsQueue = ttsCollect(); ttsIdx = 0; ttsActive = true;
+    ttsQueue = ttsCollect(); ttsIdx = 0;
+    if(!ttsQueue.length) return;
+    ttsActive = true;
     speechSynthesis.cancel();
     ttsSpeakNext();
     btn.textContent = '⏸ 잠시 멈춤'; btn.classList.add('on');
