@@ -50,15 +50,40 @@ function ttsCollect(){
   }
   return parts;
 }
+/* 한국어 음성 중 자연스러운 것을 우선 선택
+   우선순위: 자연 음성(Edge Natural) > Google > 프리미엄/신경망 > 그 외 한국어 */
+function pickKoreanVoice(){
+  var vs = speechSynthesis.getVoices().filter(function(v){
+    return v.lang && v.lang.replace('_','-').toLowerCase().indexOf('ko') === 0;
+  });
+  if(!vs.length) return null;
+  var prefs = ['natural', 'google', 'neural', 'premium', 'siri', 'yuna'];
+  for(var i = 0; i < prefs.length; i++){
+    for(var j = 0; j < vs.length; j++){
+      if(vs[j].name.toLowerCase().indexOf(prefs[i]) >= 0) return vs[j];
+    }
+  }
+  return vs[0];
+}
 function ttsSpeakNext(){
   if(!ttsActive || ttsIdx >= ttsQueue.length){ ttsReset(); return; }
   var u = new SpeechSynthesisUtterance(ttsQueue[ttsIdx]);
-  u.lang = 'ko-KR'; u.rate = 0.95;
-  var ko = speechSynthesis.getVoices().filter(function(v){ return v.lang && v.lang.indexOf('ko') === 0; });
-  if(ko.length) u.voice = ko[0];
+  u.lang = 'ko-KR'; u.rate = 1.0; u.pitch = 1.0;
+  var v = pickKoreanVoice();
+  if(v) u.voice = v;
   u.onend = function(){ ttsIdx++; ttsSpeakNext(); };
   u.onerror = function(){ ttsReset(); };
   speechSynthesis.speak(u);
+}
+function ttsStart(){
+  ttsQueue = ttsCollect(); ttsIdx = 0;
+  if(!ttsQueue.length) return;
+  ttsActive = true;
+  speechSynthesis.cancel();
+  ttsSpeakNext();
+  var btn = document.getElementById('tts-play');
+  if(btn){ btn.textContent = '⏸ 잠시 멈춤'; btn.classList.add('on'); }
+  var st = document.getElementById('tts-stop'); if(st) st.hidden = false;
 }
 function ttsToggle(){
   var btn = document.getElementById('tts-play'); if(!btn) return;
@@ -66,13 +91,17 @@ function ttsToggle(){
     btn.textContent = '이 브라우저는 음성을 지원하지 않아요'; btn.disabled = true; return;
   }
   if(!ttsActive){
-    ttsQueue = ttsCollect(); ttsIdx = 0;
-    if(!ttsQueue.length) return;
-    ttsActive = true;
-    speechSynthesis.cancel();
-    ttsSpeakNext();
-    btn.textContent = '⏸ 잠시 멈춤'; btn.classList.add('on');
-    var st = document.getElementById('tts-stop'); if(st) st.hidden = false;
+    /* 음성 목록이 아직 로드 전이면 로드를 기다렸다가 시작 */
+    if(!speechSynthesis.getVoices().length){
+      var started = false;
+      speechSynthesis.addEventListener('voiceschanged', function once(){
+        speechSynthesis.removeEventListener('voiceschanged', once);
+        if(!started){ started = true; ttsStart(); }
+      });
+      setTimeout(function(){ if(!started && !ttsActive){ started = true; ttsStart(); } }, 600);
+    } else {
+      ttsStart();
+    }
   } else if(speechSynthesis.paused){
     speechSynthesis.resume(); btn.textContent = '⏸ 잠시 멈춤';
   } else {
