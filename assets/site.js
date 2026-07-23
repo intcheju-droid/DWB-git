@@ -51,7 +51,7 @@ function ttsCollect(){
   return parts;
 }
 /* 한국어 음성 중 자연스러운 것을 우선 선택
-   우선순위: 자연 음성(Edge Natural) > Google > 프리미엄/신경망 > 그 외 한국어 */
+   우선순위: 자연 음성(Edge Natural) > Google > 신경망/프리미엄 > 그 외 한국어 */
 function pickKoreanVoice(){
   var vs = speechSynthesis.getVoices().filter(function(v){
     return v.lang && v.lang.replace('_','-').toLowerCase().indexOf('ko') === 0;
@@ -85,10 +85,29 @@ function ttsStart(){
   if(btn){ btn.textContent = '⏸ 잠시 멈춤'; btn.classList.add('on'); }
   var st = document.getElementById('tts-stop'); if(st) st.hidden = false;
 }
+/* 음성 미지원 브라우저(카카오톡 등 인앱 브라우저) 안내 */
+function ttsShowUnsupported(btn){
+  var ua = navigator.userAgent || '';
+  var inApp = /KAKAOTALK|NAVER\(inapp|Instagram|FBAN|FBAV|FB_IAB|Line\/|DaumApps/i.test(ua);
+  var msg = inApp
+    ? '카카오톡 등 앱 안의 브라우저는 음성을 지원하지 않아요. 화면 아래 메뉴(⋮)에서 "다른 브라우저로 열기"를 누르면 크롬·삼성인터넷에서 들을 수 있어요.'
+    : '이 브라우저는 음성을 지원하지 않아요. 크롬·삼성인터넷·엣지 브라우저로 열면 들을 수 있어요.';
+  var note = document.getElementById('tts-note');
+  if(!note){
+    note = document.createElement('p');
+    note.id = 'tts-note';
+    note.setAttribute('role', 'status');
+    note.style.cssText = 'font-size:.85em;color:#595959;margin:.5rem 0 0;line-height:1.6;';
+    var host = btn.closest ? (btn.closest('.meta') || btn.parentNode) : btn.parentNode;
+    host.appendChild(note);
+  }
+  note.textContent = msg;
+}
 function ttsToggle(){
   var btn = document.getElementById('tts-play'); if(!btn) return;
   if(!('speechSynthesis' in window)){
-    btn.textContent = '이 브라우저는 음성을 지원하지 않아요'; btn.disabled = true; return;
+    ttsShowUnsupported(btn);
+    return;
   }
   if(!ttsActive){
     /* 음성 목록이 아직 로드 전이면 로드를 기다렸다가 시작 */
