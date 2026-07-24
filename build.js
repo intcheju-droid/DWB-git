@@ -15,6 +15,21 @@ const SITE = {
   operator: '남명우'
 };
 
+/* ===== 복지정보 바로가기 — 외부 공공 정보 링크 =====
+ * 여기에 항목을 추가하면 메인 화면 오른쪽 배너에 자동 반영됩니다.
+ * 정부 사이트는 개편 시 주소가 바뀔 수 있으니 월 1회 링크 확인을 권장합니다. */
+const WELFARE_LINKS = [
+  { name: '보건복지부 복지뉴스',
+    desc: '복지로 · 이번 주 복지 소식',
+    url: 'https://www.bokjiro.go.kr/ssis-tbu/twatxa/wlfarePr/selectWlfareSubMain.do' },
+  { name: '보건복지부 복지서비스',
+    desc: '복지로 · 내 상황에 맞는 복지혜택 찾기',
+    url: 'https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52000M.do' },
+  { name: '법제처 시행예정법령',
+    desc: '국가법령정보센터 · 곧 시행되는 법령 (검색창에 “장애” 입력)',
+    url: 'https://www.law.go.kr/lsSc.do?menuId=1&subMenuId=23&tabMenuId=121' }
+];
+
 const ROOT = __dirname;
 const OUT = path.join(ROOT, 'public');
 
@@ -167,6 +182,13 @@ function indexPage(articles){
         }).join('')
       + '</ul></div>';
   }
+  var infoBox = '<div class="box"><h3>복지정보 바로가기</h3>'
+    + '<ul style="list-style:none;margin:0;padding:0">'
+    + WELFARE_LINKS.map(function(l){
+        return '<li style="padding:.35rem 0"><a href="' + esc(l.url) + '" target="_blank" rel="noopener">'
+          + esc(l.name) + '</a><br><span style="font-size:.82em;color:var(--sub)">' + esc(l.desc) + '</span></li>';
+      }).join('')
+    + '</ul><p style="font-size:.78em;color:var(--sub);margin-top:.4rem">외부 공공기관 사이트가 새 창으로 열립니다.</p></div>';
   var content =
     '<nav class="gnb" aria-label="주 메뉴"><ul>'
     + '<li><a href="index.html" aria-current="page">홈</a></li>'
@@ -191,6 +213,7 @@ function indexPage(articles){
     + '<aside aria-label="보조 콘텐츠">\n'
     + '<a class="easy-banner" href="articles/' + head.slug + '.html#easy">쉬운뉴스 바로가기<span>모든 주요 기사를 쉬운 문장으로도 읽을 수 있어요</span></a>\n'
     + seriesBox
+    + infoBox + '\n'
     + '<div class="box"><h3>제보 · 구독</h3><p style="font-size:.88em">여러분의 제보가 기사가 됩니다.<br><a href="mailto:' + SITE.email + '">' + SITE.email + '</a></p>'
     + '<p style="font-size:.88em;margin-top:.5rem"><a href="rss.xml">RSS 구독</a></p></div>\n'
     + '</aside>\n</div>\n</main>';
