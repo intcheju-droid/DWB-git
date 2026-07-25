@@ -30,6 +30,32 @@ const WELFARE_LINKS = [
     url: 'https://www.law.go.kr/lsSc.do?menuId=1&subMenuId=23&tabMenuId=121' }
 ];
 
+/* ===== 함께하는 단체·시설 — 외부 기관 링크 =====
+ * color는 카드 왼쪽 띠 색(기관 상징색 계열). 항목을 추가하면 배너에 자동 반영됩니다.
+ * jejuwel·wbs는 https 미지원이라 http 주소를 사용합니다(2026.7.25 확인). */
+const ORG_LINKS = [
+  { name: '제주특별자치도장애인총연합회',
+    desc: '제주 장애인단체 연합',
+    color: '#2e9e4f',
+    url: 'http://jejuwel.or.kr' },
+  { name: '탐라장애인주간보호시설',
+    desc: '성인 장애인 주간보호 · 제주',
+    color: '#d9a406',
+    url: 'http://wbs.or.kr' },
+  { name: '한국장애인주간이용시설협회',
+    desc: '전국 주간이용시설 협회',
+    color: '#e05f8f',
+    url: 'https://kdda.or.kr' },
+  { name: '제주특별자치도사회복지사협회',
+    desc: '사회복지사 자격·교육·현장 지원',
+    color: '#18a999',
+    url: 'https://welfare.net/jeju' },
+  { name: '제주복지넷',
+    desc: '제주 복지정보 검색 · 제주사회복지협의회',
+    color: '#2b8fd0',
+    url: 'https://jejubokji.net' }
+];
+
 const ROOT = __dirname;
 const OUT = path.join(ROOT, 'public');
 
@@ -189,6 +215,14 @@ function indexPage(articles){
           + esc(l.name) + '</a><br><span style="font-size:.82em;color:var(--sub)">' + esc(l.desc) + '</span></li>';
       }).join('')
     + '</ul><p style="font-size:.78em;color:var(--sub);margin-top:.4rem">외부 공공기관 사이트가 새 창으로 열립니다.</p></div>';
+  var orgBox = '<div class="box"><h3>함께하는 단체·시설</h3>'
+    + '<ul style="list-style:none;margin:0;padding:0">'
+    + ORG_LINKS.map(function(l){
+        return '<li style="margin:.5rem 0;border-left:5px solid ' + l.color + ';padding:.15rem 0 .15rem .6rem">'
+          + '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.name) + '</a>'
+          + '<br><span style="font-size:.82em;color:var(--sub)">' + esc(l.desc) + '</span></li>';
+      }).join('')
+    + '</ul><p style="font-size:.78em;color:var(--sub);margin-top:.4rem">외부 기관 사이트가 새 창으로 열립니다.</p></div>';
   var content =
     '<nav class="gnb" aria-label="주 메뉴"><ul>'
     + '<li><a href="index.html" aria-current="page">홈</a></li>'
@@ -214,6 +248,7 @@ function indexPage(articles){
     + '<a class="easy-banner" href="articles/' + head.slug + '.html#easy">쉬운뉴스 바로가기<span>모든 주요 기사를 쉬운 문장으로도 읽을 수 있어요</span></a>\n'
     + seriesBox
     + infoBox + '\n'
+    + orgBox + '\n'
     + '<div class="box"><h3>제보 · 구독</h3><p style="font-size:.88em">여러분의 제보가 기사가 됩니다.<br><a href="mailto:' + SITE.email + '">' + SITE.email + '</a></p>'
     + '<p style="font-size:.88em;margin-top:.5rem"><a href="rss.xml">RSS 구독</a></p></div>\n'
     + '</aside>\n</div>\n</main>';
