@@ -290,15 +290,15 @@ var files = fs.readdirSync(path.join(ROOT, 'articles')).filter(function(f){ retu
 var articles = files.map(parseArticle).sort(function(a, b){ return b.meta.date.localeCompare(a.meta.date); });
 if(!articles.length){ console.error('articles/ 폴더에 기사가 없습니다'); process.exit(1); }
 
+fs.rmSync(OUT, { recursive: true, force: true });
+fs.mkdirSync(path.join(OUT, 'articles'), { recursive: true });
+copyDir(path.join(ROOT, 'assets'), path.join(OUT, 'assets'));
+
 /* ===== 정적 파일 통과 =====
  * static/ 폴더에 넣은 파일은 그대로 사이트 최상위로 복사됩니다.
  * 예: static/vlog.html → dwb.ai.kr/vlog.html (앱·대시보드 등 단일 HTML 게시용) */
 var STATIC = path.join(ROOT, 'static');
 if (fs.existsSync(STATIC)) copyDir(STATIC, OUT);
-
-fs.rmSync(OUT, { recursive: true, force: true });
-fs.mkdirSync(path.join(OUT, 'articles'), { recursive: true });
-copyDir(path.join(ROOT, 'assets'), path.join(OUT, 'assets'));
 
 articles.forEach(function(a){
   fs.writeFileSync(path.join(OUT, 'articles', a.slug + '.html'), articlePage(a));
