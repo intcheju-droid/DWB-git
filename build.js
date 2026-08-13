@@ -315,6 +315,13 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(path.join(OUT, 'articles'), { recursive: true });
 copyDir(path.join(ROOT, 'assets'), path.join(OUT, 'assets'));
 
+/* ===== 정적 파일 통과 =====
+ * static/ 폴더에 넣은 파일은 그대로 사이트 최상위로 복사됩니다.
+ * 예: static/vlog.html → dwb.ai.kr/vlog.html (앱·대시보드 등 단일 HTML 게시용)
+ * ※ build.js를 교체할 때 이 블록이 빠지면 vlog.html이 404가 됩니다. */
+var STATIC = path.join(ROOT, 'static');
+if (fs.existsSync(STATIC)) copyDir(STATIC, OUT);
+
 articles.forEach(function(a){
   fs.writeFileSync(path.join(OUT, 'articles', a.slug + '.html'), articlePage(a));
 });
