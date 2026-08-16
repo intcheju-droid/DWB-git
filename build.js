@@ -119,7 +119,7 @@ function shell(opts){
   + '<a class="skip" href="#main">본문 바로가기</a>\n'
   + '<div class="topbar"><div class="inner">\n'
   + (opts.home
-      ? '<span>사람의 가치를 실현하는 장애인 주도형 언론</span>'
+      ? '<span>사람의 가치를 실현하는 장애인 주도형 소식·정보 공유 공간</span>'
       : '<a href="' + opts.base + 'index.html">← ' + esc(SITE.name) + ' 홈으로</a>')
   + '\n<span role="group" aria-label="화면 보기 설정">글자 크기\n'
   + '<button type="button" id="fs1" aria-pressed="true" onclick="setFs(\'\')">기본</button>\n'
