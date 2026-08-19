@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 사회복지시설 종사자 인건비 가이드라인 대시보드</title>
+<meta name="description" content="보건복지부 「2026년 사회복지시설 종사자 인건비 가이드라인」 원문 기반 · 전체 13쪽 · 본문·표는 한글(HWPX) 원본에서 추출">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#c05e1e; --accent-deep:#9a4511; --accent-soft:#fdf0e6; --accent-line:#eccdb4;
+  --ink:#1d2823; --ink-2:#4c5a53; --ink-3:#7b897f;
+  --bg:#f4f7f5; --card:#ffffff; --line:#dde5df;
+  --chg:#b45309; --chg-soft:#fdf3e3;
+  --mark:#ffe9a8;
+  --fs:17px; --fs-pre:13.5px;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Noto Sans KR",-apple-system,"Malgun Gothic","맑은 고딕",sans-serif;
+  font-size:var(--fs); line-height:1.65;
+}
+body.hc{
+  --accent:#ffd400; --accent-deep:#ffd400; --accent-soft:#1a1a1a; --accent-line:#666;
+  --ink:#ffffff; --ink-2:#f0f0f0; --ink-3:#cccccc;
+  --bg:#000000; --card:#0d0d0d; --line:#555;
+  --chg:#ffbf47; --chg-soft:#1f1503;
+  --mark:#8a6d00;
+}
+body.hc a{color:#ffd400}
+a{color:var(--accent-deep)}
+button{font-family:inherit}
+
+header{
+  background:linear-gradient(135deg,var(--accent-deep),var(--accent));
+  color:#fff; padding:26px 20px 20px;
+}
+body.hc header{background:#000;border-bottom:3px solid #ffd400;color:#fff}
+.hwrap{max-width:1180px;margin:0 auto}
+.htop{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;justify-content:space-between}
+.htitle h1{margin:0;font-size:1.5em;font-weight:900;letter-spacing:-.01em}
+.htitle .sub{margin-top:4px;font-size:.82em;opacity:.92}
+.hctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.hbtn{
+  background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.55);color:#fff;
+  border-radius:9px;padding:7px 13px;font-size:.85em;font-weight:700;cursor:pointer;
+}
+.hbtn:hover{background:rgba(255,255,255,.3)}
+body.hc .hbtn{background:#000;border-color:#ffd400;color:#ffd400}
+.searchrow{max-width:1180px;margin:18px auto 0;display:flex;gap:10px}
+#q{
+  flex:1;padding:13px 18px;border-radius:12px;border:none;font-size:1em;
+  font-family:inherit;box-shadow:0 3px 14px rgba(0,0,0,.18);
+}
+body.hc #q{border:2px solid #ffd400;background:#111;color:#fff}
+#qbtn{border:none;border-radius:12px;padding:0 26px;font-weight:900;font-size:1em;cursor:pointer;background:#fff;color:var(--accent-deep)}
+body.hc #qbtn{background:#ffd400;color:#000}
+
+nav{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
+.tabs{max-width:1180px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:0 12px}
+.tab{
+  border:none;background:none;padding:14px 18px;font-size:.95em;font-weight:700;color:var(--ink-2);
+  cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;
+}
+.tab.on{color:var(--accent-deep);border-bottom-color:var(--accent)}
+body.hc .tab.on{color:#ffd400;border-bottom-color:#ffd400}
+
+main{max-width:1180px;margin:0 auto;padding:26px 16px 70px}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:26px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.stat .n{font-size:1.7em;font-weight:900;color:var(--accent-deep);line-height:1.2}
+.stat .l{font-size:.8em;color:var(--ink-2);margin-top:2px}
+
+.h2{font-size:1.15em;font-weight:900;margin:34px 0 14px;display:flex;align-items:center;gap:10px}
+.h2::before{content:"";width:6px;height:22px;border-radius:3px;background:var(--accent)}
+.h2 .cnt{font-size:.75em;font-weight:700;color:var(--ink-3)}
+
+.hl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.hl{
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--chg);
+  border-radius:12px;padding:14px 16px;cursor:pointer;transition:box-shadow .15s;
+}
+.hl:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.hl .t{font-weight:700;font-size:.95em}
+.hl .d{font-size:.82em;color:var(--ink-2);margin-top:5px}
+.hl .p{font-size:.75em;color:var(--chg);font-weight:700;margin-top:7px}
+
+.ch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:14px}
+.chcard{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px;cursor:pointer;transition:transform .12s,box-shadow .15s;position:relative;overflow:hidden;
+}
+.chcard:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.14)}
+.chcard .no{
+  display:inline-block;background:var(--accent-soft);color:var(--accent-deep);
+  font-weight:900;font-size:.75em;border-radius:7px;padding:3px 10px;
+}
+body.hc .chcard .no{background:#000;border:1px solid #ffd400;color:#ffd400}
+.chcard h3{margin:10px 0 4px;font-size:1.06em;font-weight:900;letter-spacing:-.01em}
+.chcard .pg{font-size:.76em;color:var(--ink-3);font-weight:600}
+.chcard ul{margin:10px 0 0;padding:0;list-style:none;font-size:.8em;color:var(--ink-2)}
+.chcard li{padding:2.5px 0;border-top:1px dashed var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chcard li:first-child{border-top:none}
+
+.chgtable{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:.9em}
+.chgtable th{background:var(--accent-soft);color:var(--accent-deep);text-align:left;padding:11px 14px;font-size:.85em}
+body.hc .chgtable th{background:#1a1a1a;color:#ffd400}
+.chgtable td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+.chgtable .code{font-weight:900;color:var(--chg);white-space:nowrap}
+.chgtable .nm{font-weight:700}
+.gobtn{
+  display:inline-block;border:1.5px solid var(--accent-line);background:var(--accent-soft);
+  color:var(--accent-deep);border-radius:8px;padding:3px 10px;font-size:.82em;font-weight:700;
+  cursor:pointer;margin:2px 4px 2px 0;text-decoration:none;
+}
+body.hc .gobtn{background:#000;color:#ffd400;border-color:#ffd400}
+.notice{
+  background:var(--chg-soft);border:1px solid #ecd9b0;border-radius:12px;
+  padding:13px 17px;font-size:.86em;color:var(--ink-2);margin:14px 0 22px;
+}
+body.hc .notice{border-color:#ffbf47}
+
+.reader{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:start}
+.side{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:10px;position:sticky;top:64px;max-height:calc(100vh - 90px);overflow-y:auto;
+}
+.side .chh{
+  width:100%;text-align:left;border:none;background:none;padding:10px 10px;font-weight:900;
+  font-size:.93em;color:var(--ink);cursor:pointer;border-radius:9px;display:flex;justify-content:space-between;gap:6px;
+}
+.side .chh:hover{background:var(--accent-soft)}
+.side .chh .ar{color:var(--ink-3);font-weight:400}
+.side .secs{padding-left:6px}
+.side .sec{
+  width:100%;text-align:left;border:none;background:none;padding:7px 10px;font-size:.84em;
+  color:var(--ink-2);cursor:pointer;border-radius:8px;display:block;line-height:1.4;
+}
+.side .sec:hover{background:var(--accent-soft)}
+.side .sec.on{background:var(--accent);color:#fff;font-weight:700}
+body.hc .side .sec.on{background:#ffd400;color:#000}
+.side .sub{padding-left:26px;font-size:.8em}
+.content{min-width:0}
+.crumb{font-size:.82em;color:var(--ink-3);margin-bottom:6px}
+.content h2.title{margin:0 0 4px;font-size:1.3em;font-weight:900;letter-spacing:-.01em}
+.content .range{font-size:.83em;color:var(--ink-2);margin-bottom:16px}
+.pageblock{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:14px;overflow:hidden}
+.pagehead{
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--accent-soft);padding:6px 14px;font-size:.78em;font-weight:900;color:var(--accent-deep);
+}
+body.hc .pagehead{background:#1a1a1a;color:#ffd400}
+.pdflink{
+  margin-left:10px;font-weight:700;font-size:.95em;color:var(--accent-deep);
+  text-decoration:none;border-bottom:1.5px solid var(--accent-line);
+}
+.pdflink:hover{border-bottom-color:var(--accent-deep)}
+body.hc .pdflink{color:#ffd400;border-bottom-color:#ffd400}
+.pageblock pre{
+  margin:6px 0;padding:12px 14px;white-space:pre;overflow-x:auto;
+  font-family:"Nanum Gothic Coding","D2Coding",ui-monospace,monospace;
+  font-size:var(--fs-pre);line-height:1.62;color:var(--ink);
+  background:color-mix(in srgb,var(--bg) 55%,var(--card));border-radius:8px;
+}
+.pagebody{padding:14px 18px}
+.ln{line-height:1.72;margin:1px 0;padding-left:calc(var(--ind,0)*.52em);word-break:keep-all;overflow-wrap:break-word}
+.ln.h1{
+  font-size:1.16em;font-weight:900;color:var(--accent-deep);margin:16px 0 10px;
+  background:var(--accent-soft);border-radius:10px;padding:9px 14px;
+}
+body.hc .ln.h1{background:#1a1a1a;color:#ffd400}
+.ln.h2{font-size:1.07em;font-weight:900;margin:16px 0 6px;padding-left:0}
+.badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:1.55em;height:1.55em;border-radius:50%;background:var(--accent);
+  color:#fff;font-size:.82em;font-weight:900;margin-right:.45em;vertical-align:.05em;
+}
+body.hc .badge{background:#ffd400;color:#000}
+.ln.h3{font-weight:800;margin:11px 0 3px}
+.ln.h4{font-weight:700;margin:7px 0 2px}
+.ln.b1{margin-top:6px}
+.ln.note{
+  color:var(--ink-2);font-size:.88em;background:var(--chg-soft);
+  border-radius:8px;padding:5px 10px;margin:5px 0;
+}
+.gap{height:.5em}
+
+/* ── 하이브리드(HWPX) 모드: 진짜 표·쪽 칩 ── */
+.htbl{border-collapse:collapse;margin:10px 0;font-size:.9em;width:100%;line-height:1.55}
+.htbl td{border:1px solid var(--line);padding:6px 10px;vertical-align:top;word-break:keep-all}
+.htbl tr:first-child td{background:var(--accent-soft);font-weight:700;color:var(--accent-deep)}
+body.hc .htbl tr:first-child td{background:#1a1a1a;color:#ffd400}
+.tblwrap{overflow-x:auto}
+.pchip{
+  display:flex;align-items:center;gap:10px;margin:20px 0 10px;
+  font-size:.76em;font-weight:900;color:var(--accent-deep);
+}
+.pchip::before,.pchip::after{content:"";height:1px;background:var(--line);flex:0 0 24px}
+.pchip::after{flex:1}
+.pchip .approx{font-weight:400;color:var(--ink-3)}
+body.hc .pchip{color:#ffd400}
+mark{background:var(--mark);border-radius:3px;padding:0 2px}
+body.hc mark{color:#fff}
+.secnav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.secnav button{
+  border:1.5px solid var(--accent-line);background:var(--card);color:var(--accent-deep);
+  border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;font-size:.9em;max-width:48%;
+}
+.secnav button:hover{background:var(--accent-soft)}
+body.hc .secnav button{color:#ffd400;border-color:#ffd400}
+
+.sr{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 17px;margin-bottom:11px;cursor:pointer}
+.sr:hover{box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.sr .loc{font-size:.78em;font-weight:900;color:var(--accent-deep)}
+.sr .snip{font-size:.87em;color:var(--ink-2);margin-top:5px;line-height:1.6}
+.rescount{font-size:.9em;color:var(--ink-2);margin:4px 0 16px}
+
+footer{border-top:1px solid var(--line);background:var(--card);padding:22px 16px 34px;margin-top:30px}
+.fwrap{max-width:1180px;margin:0 auto;font-size:.8em;color:var(--ink-3);line-height:1.8}
+
+@media(max-width:840px){
+  .reader{grid-template-columns:1fr}
+  .side{position:static;max-height:260px}
+  .htitle h1{font-size:1.2em}
+}
+@media print{header,nav,.side,.secnav,footer{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="htop">
+      <div class="htitle">
+        <h1>2026 사회복지시설 종사자 인건비 가이드라인 대시보드</h1>
+        <div class="sub">보건복지부 「2026년 사회복지시설 종사자 인건비 가이드라인」 원문 기반 · 전체 13쪽 · 본문·표는 한글(HWPX) 원본에서 추출</div>
+      </div>
+      <div class="hctrl" role="group" aria-label="화면 설정">
+        <button class="hbtn" id="fMinus" aria-label="글자 작게">가−</button>
+        <button class="hbtn" id="fPlus" aria-label="글자 크게">가＋</button>
+        <button class="hbtn" id="hcBtn" aria-pressed="false">고대비</button>
+      </div>
+    </div>
+    <div class="searchrow" role="search">
+      <input id="q" type="search" placeholder="키워드 검색 — 예: 호봉, 명절휴가비, 가족수당, 승진, 사회복지사 (여러 단어는 띄어쓰기)" aria-label="본문 검색">
+      <button id="qbtn">검색</button>
+    </div>
+  </div>
+</header>
+
+<nav aria-label="주 메뉴"><div class="tabs" id="tabs"></div></nav>
+
+<main id="main"></main>
+
+<footer><div class="fwrap">원문: 보건복지부 「2026년 사회복지시설 종사자 인건비 가이드라인」 (2026).<br>본 페이지는 원문 한글(HWPX) 파일의 본문·표와 원문 PDF의 쪽수를 결합해 재구성한 <b>참고용 자료</b>입니다. 이 가이드라인은 권고 기준이며, 실제 보수는 지자체·시설별 지침을 따릅니다. 업무 적용 시에는 반드시 원문 해당 쪽을 확인하시기 바랍니다.<br>제작: 더불어 함께 (dwb.ai.kr)</div></footer>
+
+<script type="application/json" id="guide-cfg">{"slug": "pay2026", "title": "2026 사회복지시설 종사자 인건비 가이드라인 대시보드", "subtitle": "보건복지부 「2026년 사회복지시설 종사자 인건비 가이드라인」 원문 기반 · 전체 13쪽 · 본문·표는 한글(HWPX) 원본에서 추출", "docTitle": "2026년 사회복지시설 종사자 인건비 가이드라인", "unitLabel": "부", "pdfUrl": "pay2026.pdf", "pdfOffset": 0, "searchPlaceholder": "키워드 검색 — 예: 호봉, 명절휴가비, 가족수당, 승진, 사회복지사 (여러 단어는 띄어쓰기)", "footerHtml": "원문: 보건복지부 「2026년 사회복지시설 종사자 인건비 가이드라인」 (2026).<br>본 페이지는 원문 한글(HWPX) 파일의 본문·표와 원문 PDF의 쪽수를 결합해 재구성한 <b>참고용 자료<\/b>입니다. 이 가이드라인은 권고 기준이며, 실제 보수는 지자체·시설별 지침을 따릅니다. 업무 적용 시에는 반드시 원문 해당 쪽을 확인하시기 바랍니다.<br>제작: 더불어 함께 (dwb.ai.kr)", "chapterTileLabel": "구성", "sectionTileLabel": "세부 항목", "browseTab": "목차별 열람", "browseTitle": "목차별 열람", "highlightsTitle": "핵심 기준 바로가기", "quickTabs": [{"label": "기본급 별표", "ch": 3, "sec": 0}], "highlights": [{"t": "생활시설·이용시설 기본급 권고 기준(별표1)", "d": "원장 1호봉 2,980,600원 등 직위·호봉별 기본급 — 사회복지직 이용시설 포함", "p": 7}, {"t": "명절휴가비", "d": "재직 종사자에게 기본급의 120%(60%씩 연 2회, 설·추석이 속한 달)", "p": 12}, {"t": "가족수당", "d": "배우자 월 40,000원, 그 외 부양가족 1명당 월 20,000원", "p": 12}, {"t": "직종별 기본급 별표(의료·사무·관리·기타)", "d": "별표2~5 — 의료직·사무직·관리직·기타직종 기본급 권고·지급 기준", "p": 8}, {"t": "승진 최소 소요 연한(별표6·7)", "d": "사회복지직 직위별·기타 직종 직급별 승진 최소 소요 연한", "p": 11}, {"t": "적용가능 시설의 종류(별표9)", "d": "이 가이드라인을 적용할 수 있는 사회복지시설 범위", "p": 13}]}</script>
+<script type="application/json" id="guide-data">{"title": "2026년 사회복지시설 종사자 인건비 가이드라인", "totalPages": 13, "chapters": [{"no": 1, "title": "가이드라인 총론", "start": 1, "end": 3, "sections": [{"title": "1~2. 법적 근거·적용 대상", "start": 1, "end": 1, "html": "<div class=\"pchip\" id=\"p1\"><span>원문 1쪽<\/span> <a class=\"pdflink\" href=\"pay2026.pdf#page=1\" target=\"_blank\" rel=\"noopener\" title=\"원문 PDF 해당 쪽을 새 탭에서 엽니다(PC에서 정확 이동).\">원문 PDF ↗<\/a><\/div><div class=\"ln p\">2026년 사회복지시설 종사자 인건비 가이드라인<\/div><div class=\"ln p\">1. 법적 근거<\/div><div class=\"ln b1\">○「사회복지사 등 처우 및 지위 향상을 위한 법률」제3조<\/div><div class=\"ln p\">제3조(사회복지사 등의 처우개선과 신분보장) ① 국가와 지방자치단체는 사회복지사 등의 처우를 개선하고 복지를 증진함과 아울러 그 지위 향상을 위하여 적극적으로 노력하여야 한다. ② 국가와 지방자치단체는 사회복지사 등의 보수가 사회복지전담공무원의 보수수준에 도달하도록 노력하여야 한다. ③ 국가는 사회복지사 등의 적정 인건비에 관한 기준을 마련하여야 하며, 지방자치단체는 해당 기준을 준수하기 위하여 노력하여야 한다.  &lt;신설 2018. 12. 11.&gt; ④ 보건복지부장관과 지방자치단체의 장은 사회복지사 등의 보수 수준 및 지급실태, 제3항에 따른 기준의 지방자치단체별 준수율 등에 관하여 3년마다 조사ㆍ공표하여야 한다.  &lt;개정 2018. 12. 11.&gt; ⑤ 사회복지사 등은 사회복지법인 등의 운영과 관련된 위법ㆍ부당 행위 및 그 밖의 비리 사실 등을 관계 행정기관과 수사기관에 신고하는 행위로 인하여 징계 조치 등 신분상 불이익이나 근무조건상 차별을 받지 아니한다.  &lt;개정 2018. 12. 11.&gt; [시행일 : 2019. 12. 12.] 제3조<\/div><div class=\"ln b1\">○ 「사회복지사 등 처우 및 지위 향상을 위한 법률」 시행령 제4조<\/div><div class=\"ln p\">제4조(보수수준에 관한 권고기준) 보건복지부장관은 실태조사 결과에 따른 사회복지사 등의 보수수준과 「사회보장급여의 이용제공 및 수급권자 발굴에 관한 법률」 제43조에 따른 사회복지 전담공무원의 보수수준을 비교하여 사회복지사 등의 보수수준에 관한 권고기준을 정할 수 있다.<\/div><div class=\"ln p\">2. 적용 대상<\/div><div class=\"ln b1\">○「사회복지사업법」제2조에 따라 사회복지사업을 행할 목적으로 설립된 사회복지시설 (별표9 참조)<\/div><div class=\"ln p\">- 국고지원시설과 지방이양시설 모두 포함하되, 「영유아보육법」에 따른 ‘어린이집’, 「노인장기요양보험법」을 적용받는 ‘노인의료복지시설’과 ‘재가노인복지시설’은 제외<\/div><div class=\"ln p\">3. 적용 원칙<\/div>", "pages": [{"p": 1, "t": "2026년 사회복지시설 종사자 인건비 가이드라인\n1. 법적 근거\n○「사회복지사 등 처우 및 지위 향상을 위한 법률」제3조\n제3조(사회복지사 등의 처우개선과 신분보장) ① 국가와 지방자치단체는 사회복지사 등의 처우를 개선하고 복지를 증진함과 아울러 그 지위 향상을 위하여 적극적으로 노력하여야 한다. ② 국가와 지방자치단체는 사회복지사 등의 보수가 사회복지전담공무원의 보수수준에 도달하도록 노력하여야 한다. ③ 국가는 사회복지사 등의 적정 인건비에 관한 기준을 마련하여야 하며, 지방자치단체는 해당 기준을 준수하기 위하여 노력하여야 한다.  <신설 2018. 12. 11.> ④ 보건복지부장관과 지방자치단체의 장은 사회복지사 등의 보수 수준 및 지급실태, 제3항에 따른 기준의 지방자치단체별 준수율 등에 관하여 3년마다 조사ㆍ공표하여야 한다.  <개정 2018. 12. 11.> ⑤ 사회복지사 등은 사회복지법인 등의 운영과 관련된 위법ㆍ부당 행위 및 그 밖의 비리 사실 등을 관계 행정기관과 수사기관에 신고하는 행위로 인하여 징계 조치 등 신분상 불이익이나 근무조건상 차별을 받지 아니한다.  <개정 2018. 12. 11.> [시행일 : 2019. 12. 12.] 제3조\n○ 「사회복지사 등 처우 및 지위 향상을 위한 법률」 시행령 제4조\n제4조(보수수준에 관한 권고기준) 보건복지부장관은 실태조사 결과에 따른 사회복지사 등의 보수수준과 「사회보장급여의 이용제공 및 수급권자 발굴에 관한 법률」 제43조에 따른 사회복지 전담공무원의 보수수준을 비교하여 사회복지사 등의 보수수준에 관한 권고기준을 정할 수 있다.\n2. 적용 대상\n○「사회복지사업법」제2조에 따라 사회복지사업을 행할 목적으로 설립된 사회복지시설 (별표9 참조)\n- 국고지원시설과 지방이양시설 모두 포함하되, 「영유아보육법」에 따른 ‘어린이집’, 「노인장기요양보험법」을 적용받는 ‘노인의료복지시설’과 ‘재가노인복지시설’은 제외\n3. 적용 원칙"}]}, {"title": "3~4. 적용 원칙·기타 사항", "start": 2, "end": 3, "html": "<div class=\"pchip\" id=\"p2\"><span>원문 2쪽<\/span> <a class=\"pdflink\" href=\"pay2026.pdf#page=2\" target=\"_blank\" rel=\"noopener\" title=\"원문 PDF 해당 쪽을 새 탭에서 엽니다(PC에서 정확 이동).\">원문 PDF ↗<\/a><\/div><div class=\"ln b1\">○동 인건비 지급기준을 우선 적용하되, 기본급 및 수당 기준 등은 개별 시설유형과 지방자치단체 예산사정 등에 따라 별도로 마련 가능<\/div><div class=\"ln p\">- 호봉제 미적용 등 인건비 기준을 달리 적용하는 시설의 경우는 종사자 수, 이용자 수 등 시설의 규모에 따라 시설장 및 종사자의 인건비 지급기준을 시설별‧지자체별 개별지침에 명시하여 적용 가능<\/div><div class=\"ln b1\">○ ｢근로기준법｣ 규정에 따른 연장, 야간, 휴일 근로수당, 퇴직금, 기타 4대보험 등의 경우 근로기준법 및 개별법령을 준수<\/div><div class=\"ln p\">→법정근로시간 과다 초과, 연장·야간 및 휴일근로 수당 등’ 미지급 등에 따른 노사분쟁이 발생하지 않도록 유의<\/div><div class=\"ln b1\">○종사자 보수 수준 관리<\/div><div class=\"ln p\">- 지방자치단체는 월별로 종사자의 정확한 기본급 및 수당을 파악하고, 시설에서 종사자 입·퇴사 보고 등을 위해 사용 중인 「사회서비스정보시스템」 내 급여 및 회계 기능사용 조치 후 확인<\/div><div class=\"ln p\">* 사회서비스정보시스템 ‘인사회계’ → ‘급여관리’ → ‘급여현황’ → ‘급여대장’ 기능을 활용하고 상세 매뉴얼은 시스템 홈페이지(www.ssis.go.kr) 참조<\/div><div class=\"ln p\">4. 기타 사항<\/div><div class=\"ln b1\">○보수 인상 및 보수체계 변경<\/div><div class=\"ln p\">- 본 기준은 권고 기준이므로 질 높은 복지서비스 제공을 위해 개별 시설 담당부서와 지방자치단체는 이를 참고하여 기준 이상이 되도록 노력할 것<\/div><div class=\"ln b1\">○보수 기준 적용 직위의 분류 (예시 참조)<\/div><div class=\"ln p\">- 시설 관련 개별법령이 정한 종사자 배치기준에 의해 사회복지시설에 근무하고 있는 자의 인건비를 보조하기 위한 기준으로 종사자 직위를 분류함<\/div><div class=\"ln p\">- 시설별 지침 및 지방자치단체의 지침에서 직위별 대상자 범위에 포함되지 않은 종사자의 직위 분류 및 보수 등을 정할 경우 그에 따름<\/div><div class=\"pchip\" id=\"p3\"><span>원문 3쪽<\/span> <a class=\"pdflink\" href=\"pay2026.pdf#page=3\" target=\"_blank\" rel=\"noopener\" title=\"원문 PDF 해당 쪽을 새 탭에서 엽니다(PC에서 정확 이동).\">원문 PDF ↗<\/a><\/div><div class=\"ln p\">- 직위의 분류에 있어 생활복지사, 생활지도원 등은 시설종사자 인건비를 보조하기 위한 직위이며, 개별법령상 생활복지사 등 자격은 해당 법령에 의해서만 인정<\/div><div class=\"ln p\">아동복지시설의 직업훈련교사는 직위의 분류에 있어 생활복지사에 해당하나 ｢아동복지법｣상의 생활복지사에는 해당하지 않음<\/div><div class=\"ln p\">→｢아동복지법｣상 생활복지사는 ①사회복지사 2급자격 이상 소지자, ②유치원, 초등학교, 중등학교 교사 자격 소지자, ③보육교사 1급 자격소지자만이 가능<\/div><div class=\"ln p\">예시<\/div><div class=\"ln p\">(직위분류 예시 : 생활시설 중심)<\/div><table class=\"htbl\"><tr><td>직  위<\/td><td>노 인<\/td><td>장애인<\/td><td>아 동<\/td><td>정 신<\/td><td>노숙인<\/td><\/tr><tr><td>원장<\/td><td colspan=\"5\">시설장<\/td><\/tr><tr><td>사무국장<\/td><td>사무국장, 총무<\/td><td>사무국장, 총무<\/td><td>사무국장<\/td><td>사무국장,<br>정신건강전문요원<\/td><td>총무<br>상담부장<br>정신건강전문요원<\/td><\/tr><tr><td>과장 및<br>생활복지사<\/td><td>과장<br>생활복지사<br>상담지도원<br>간호사<br>영양사<br>물리치료사<\/td><td>과장<br>사회재활교사<br>간호사, 영양사<br>물리치료사<br>작업치료사<br>청능치료사<br>언어치료사<br>보행훈련사<br>상담평가요원<\/td><td>과장<br>생활복지사<br>상담지도원<br>간호사, 영양사<br>직업훈련교사<br>임상심리상담원<br>자립지원전담요원<\/td><td>과장<br>생활복지사<br>간호사<br>영양사<br>작업지도원<\/td><td>생활복지사<br>상담지도원<br>간호사<br>영양사<br>물리치료사<br>직업훈련교사<\/td><\/tr><tr><td>생활지도원<\/td><td colspan=\"5\">생활지도원, 보육사, 간호조무사, 사무원<\/td><\/tr><tr><td>관리직<\/td><td colspan=\"5\">관리인, 경비원<\/td><\/tr><tr><td>기능직<\/td><td colspan=\"5\">조리원, 위생원<\/td><\/tr><\/table><div class=\"ln note\">※ 직위분류 예시에 포함되지 않은 시설유형 및 직위는 개별 사업지침을 참고하여 적용<\/div><div class=\"ln note\">※ 소규모시설로서 위 예시에 적합하지 않은 시설은 개별 사업지침에서 별도 체계 적용 가능<\/div><div class=\"ln p\">붙임 1. 2026년 사회복지시설 종사자 보수 체계<\/div><div class=\"ln p\">붙임 2. 2026년 사회복지시설 종사자 인건비 권고기준 (별표1~9)<\/div>", "pages": [{"p": 2, "t": "○동 인건비 지급기준을 우선 적용하되, 기본급 및 수당 기준 등은 개별 시설유형과 지방자치단체 예산사정 등에 따라 별도로 마련 가능\n- 호봉제 미적용 등 인건비 기준을 달리 적용하는 시설의 경우는 종사자 수, 이용자 수 등 시설의 규모에 따라 시설장 및 종사자의 인건비 지급기준을 시설별‧지자체별 개별지침에 명시하여 적용 가능\n○ ｢근로기준법｣ 규정에 따른 연장, 야간, 휴일 근로수당, 퇴직금, 기타 4대보험 등의 경우 근로기준법 및 개별법령을 준수\n→법정근로시간 과다 초과, 연장·야간 및 휴일근로 수당 등’ 미지급 등에 따른 노사분쟁이 발생하지 않도록 유의\n○종사자 보수 수준 관리\n- 지방자치단체는 월별로 종사자의 정확한 기본급 및 수당을 파악하고, 시설에서 종사자 입·퇴사 보고 등을 위해 사용 중인 「사회서비스정보시스템」 내 급여 및 회계 기능사용 조치 후 확인\n* 사회서비스정보시스템 ‘인사회계’ → ‘급여관리’ → ‘급여현황’ → ‘급여대장’ 기능을 활용하고 상세 매뉴얼은 시스템 홈페이지(www.ssis.go.kr) 참조\n4. 기타 사항\n○보수 인상 및 보수체계 변경\n- 본 기준은 권고 기준이므로 질 높은 복지서비스 제공을 위해 개별 시설 담당부서와 지방자치단체는 이를 참고하여 기준 이상이 되도록 노력할 것\n○보수 기준 적용 직위의 분류 (예시 참조)\n- 시설 관련 개별법령이 정한 종사자 배치기준에 의해 사회복지시설에 근무하고 있는 자의 인건비를 보조하기 위한 기준으로 종사자 직위를 분류함\n- 시설별 지침 및 지방자치단체의 지침에서 직위별 대상자 범위에 포함되지 않은 종사자의 직위 분류 및 보수 등을 정할 경우 그에 따름"}, {"p": 3, "t": "- 직위의 분류에 있어 생활복지사, 생활지도원 등은 시설종사자 인건비를 보조하기 위한 직위이며, 개별법령상 생활복지사 등 자격은 해당 법령에 의해서만 인정\n아동복지시설의 직업훈련교사는 직위의 분류에 있어 생활복지사에 해당하나 ｢아동복지법｣상의 생활복지사에는 해당하지 않음\n→｢아동복지법｣상 생활복지사는 ①사회복지사 2급자격 이상 소지자, ②유치원, 초등학교, 중등학교 교사 자격 소지자, ③보육교사 1급 자격소지자만이 가능\n예시\n(직위분류 예시 : 생활시설 중심)\n직  위 | 노 인 | 장애인 | 아 동 | 정 신 | 노숙인\n원장 | 시설장\n사무국장 | 사무국장, 총무 | 사무국장, 총무 | 사무국장 | 사무국장, 정신건강전문요원 | 총무 상담부장 정신건강전문요원\n과장 및 생활복지사 | 과장 생활복지사 상담지도원 간호사 영양사 물리치료사 | 과장 사회재활교사 간호사, 영양사 물리치료사 작업치료사 청능치료사 언어치료사 보행훈련사 상담평가요원 | 과장 생활복지사 상담지도원 간호사, 영양사 직업훈련교사 임상심리상담원 자립지원전담요원 | 과장 생활복지사 간호사 영양사 작업지도원 | 생활복지사 상담지도원 간호사 영양사 물리치료사 직업훈련교사\n생활지도원 | 생활지도원, 보육사, 간호조무사, 사무원\n관리직 | 관리인, 경비원\n기능직 | 조리원, 위생원\n※ 직위분류 예시에 포함되지 않은 시설유형 및 직위는 개별 사업지침을 참고하여 적용\n※ 소규모시설로서 위 예시에 적합하지 않은 시설은 개별 사업지침에서 별도 체계 적용 가능\n붙임 1. 2026년 사회복지시설 종사자 보수 체계\n붙임 2. 2026년 사회복지시설 종사자 인건비 권고기준 (별표1~9)"}]}]}, {"no": 2, "title": "2026년도 보수 체계 규정", "start": 4, "end": 6, "sections": [{"title": "제1~2장 총칙·기본급", "start": 4, "end": 4, "html": "<div class=\"pchip\" id=\"p4\"><span>원문 4쪽<\/span> <a class=\"pdflink\" href=\"pay2026.pdf#page=4\" target=\"_blank\" rel=\"noopener\" title=\"원문 PDF 해당 쪽을 새 탭에서 엽니다(PC에서 정확 이동).\">원문 PDF ↗<\/a><\/div><div class=\"ln p\">2026년도 사회복지시설 종사자 보수 체계<\/div><div class=\"ln p\">제1장 총 칙<\/div><div class=\"ln p\">제1조(목적) 이 보수지급 기준은 ｢사회복지사업법｣ 제2조 및 ｢노인복지법｣, ｢장애인복지법｣, ｢아동복지법｣ 등 개별 법령의거 설치된 사회복지시설에 근무하는 종사자의 보수에 관하여 필요한 사항을 규정, 권장함으로 종사자의 장기근속을 유도하고 전문성을 높이고 사회복지 증진에 기여함을 목적으로 한다.<\/div><div class=\"ln p\">제2조(용어의 정의) 이 기준에서 사용하는 용어의 정의는 다음과 같다.<\/div><div class=\"ln p\">1. “보수”라 함은 기본급과 기타 각종 수당을 합산한 금액을 말한다.<\/div><div class=\"ln p\">2. “기본급”이라 함은 직무의 곤란성 및 책임의 정도와 재직기간 등에 따라 직급별, 호봉별로 지급되는 기본급여를 말한다.<\/div><div class=\"ln p\">3. “수당”이라 함은 직무여건 및 생활여건 등에 따라 지급되는 부가급여를 말한다.<\/div><div class=\"ln p\">4. “직종”이라 함은 직무의 전문성 및 성격에 따라 사회복지직(장애인복지관은 이하 “일반직”이라 한다.), 사무직, 의료직, 관리직, 기타 등으로 구분하는 것을 말한다.<\/div><div class=\"ln p\">5. “직위”이라 함은 1명의 종사자에게 부여할 수 있는 직무와 책임을 말한다.<\/div><div class=\"ln p\">6. “직급”이란 직무의 종류·곤란성과 책임도가 상당히 유사한 직위의 군을 말한다.<\/div><div class=\"ln p\">7. “승진”이라 함은 현재의 직급 또는 직책 보다 상위의 직급 또는 직책에 임명하는 것을 말한다.<\/div><div class=\"ln p\">8. “승급”이라 함은 일정한 재직기간의 경과에 의하여 현재의 호봉보다 높은 호봉을 부여하는 것을 말한다.<\/div><div class=\"ln p\">9. “보수의 일할계산”이라 함은 그 달의 보수를 그 달의 일수로 나누어 계산하는 것을 말한다.<\/div><div class=\"ln p\">제3조(적용범위) 사회복지시설 종사자의 보수는 이 기준을 따른다. 단, 별도의 인건비 지급기준 등을 적용받는 종사자는 해당 기준에 의한다.<\/div><div class=\"ln p\">제2장 기 본 급<\/div><div class=\"ln p\">제4조(기본급)<\/div><div class=\"ln p\">1. 사회복지시설 종사자의 월 기본급은 별표1부터 별표4까지의 기본급 권고 기준표를 참고로 하여 지방자치단체 실정에 맞게 지급할 수 있다.<\/div><div class=\"ln p\">2. 전항의 규정에 의한 종사자의 월 기본급 중 별표1부터 별표4까지의 기준표에 규정된 최고 호봉을 초과하는 경우는 최고 호봉을 적용하고, 당해연도 직위별·호봉별 인상분은 포함하여 지급한다.<\/div><div class=\"ln p\">3. 전항의 규정에 의한 기본급 외에 종사자의 처우개선 등을 위하여 필요하다고 인정되는 경우 또는 최고 호봉을 초과하는 경우 지방자치단체장 및 운영법인 등은 자체부담에 의거 별도로 추가액을 확보하여 지급할 수 있다.<\/div>", "pages": [{"p": 4, "t": "2026년도 사회복지시설 종사자 보수 체계\n제1장 총 칙\n제1조(목적) 이 보수지급 기준은 ｢사회복지사업법｣ 제2조 및 ｢노인복지법｣, ｢장애인복지법｣, ｢아동복지법｣ 등 개별 법령의거 설치된 사회복지시설에 근무하는 종사자의 보수에 관하여 필요한 사항을 규정, 권장함으로 종사자의 장기근속을 유도하고 전문성을 높이고 사회복지 증진에 기여함을 목적으로 한다.\n제2조(용어의 정의) 이 기준에서 사용하는 용어의 정의는 다음과 같다.\n1. “보수”라 함은 기본급과 기타 각종 수당을 합산한 금액을 말한다.\n2. “기본급”이라 함은 직무의 곤란성 및 책임의 정도와 재직기간 등에 따라 직급별, 호봉별로 지급되는 기본급여를 말한다.\n3. “수당”이라 함은 직무여건 및 생활여건 등에 따라 지급되는 부가급여를 말한다.\n4. “직종”이라 함은 직무의 전문성 및 성격에 따라 사회복지직(장애인복지관은 이하 “일반직”이라 한다.), 사무직, 의료직, 관리직, 기타 등으로 구분하는 것을 말한다.\n5. “직위”이라 함은 1명의 종사자에게 부여할 수 있는 직무와 책임을 말한다.\n6. “직급”이란 직무의 종류·곤란성과 책임도가 상당히 유사한 직위의 군을 말한다.\n7. “승진”이라 함은 현재의 직급 또는 직책 보다 상위의 직급 또는 직책에 임명하는 것을 말한다.\n8. “승급”이라 함은 일정한 재직기간의 경과에 의하여 현재의 호봉보다 높은 호봉을 부여하는 것을 말한다.\n9. “보수의 일할계산”이라 함은 그 달의 보수를 그 달의 일수로 나누어 계산하는 것을 말한다.\n제3조(적용범위) 사회복지시설 종사자의 보수는 이 기준을 따른다. 단, 별도의 인건비 지급기준 등을 적용받는 종사자는 해당 기준에 의한다.\n제2장 기 본 급\n제4조(기본급)\n1. 사회복지시설 종사자의 월 기본급은 별표1부터 별표4까지의 기본급 권고 기준표를 참고로 하여 지방자치단체 실정에 맞게 지급할 수 있다.\n2. 전항의 규정에 의한 종사자의 월 기본급 중 별표1부터 별표4까지의 기준표에 규정된 최고 호봉을 초과하는 경우는 최고 호봉을 적용하고, 당해연도 직위별·호봉별 인상분은 포함하여 지급한다.\n3. 전항의 규정에 의한 기본급 외에 종사자의 처우개선 등을 위하여 필요하다고 인정되는 경우 또는 최고 호봉을 초과하는 경우 지방자치단체장 및 운영법인 등은 자체부담에 의거 별도로 추가액을 확보하여 지급할 수 있다."}]}, {"title": "제3~4장 호봉 획정 및 승급·승진", "start": 5, "end": 5, "html": "<div class=\"pchip\" id=\"p5\"><span>원문 5쪽<\/span> <a class=\"pdflink\" href=\"pay2026.pdf#page=5\" target=\"_blank\" rel=\"noopener\" title=\"원문 PDF 해당 쪽을 새 탭에서 엽니다(PC에서 정확 이동).\">원문 PDF ↗<\/a><\/div><div class=\"ln p\">제3장 호봉 획정 및 승급<\/div><div class=\"ln p\">제5조(호봉획정 및 승급시행권자) 호봉획정 및 승급은 임용권자가 시행하고, 사회복지시설을 관할하는 지방자치단체장이 해당 사회복지시설 종사자의 재직 관련 서류 등을 통해 확인하여야 한다.<\/div><div class=\"ln p\">제6조(인정경력) 대상 경력은 사회복지시설 근무경력, 유사경력, 군복무근무경력 등을 말하며, 경력인정의 범위 및 환산율은 ｢사회복지시설 관리안내｣ 중 호봉의 획정 및 승급과 각 시설 유형별 개별지침을 참조하여 준용한다.<\/div><div class=\"ln p\">제7조(초임호봉의 획정 및 경력년수 산정)<\/div><div class=\"ln p\">1. 종사자를 신규 채용하는 경우에는 초임호봉을 획정한다.<\/div><div class=\"ln p\">2. 초임호봉은 1호봉으로 하되, 제6조에 정하여진 근무경력이 있는 경우에는 경력별 근무기간 1년을 각각 1호봉씩으로 하여 초임호봉을 정한다.<\/div><div class=\"ln p\">3. 초임호봉의 획정에 반영되지 아니한 1년 미만의 잔여기간이 있을 때는 그 기간을 다음 승급 기간에 산입한다.<\/div><div class=\"ln p\">제8조(승급 및 승진)<\/div><div class=\"ln p\">1. 호봉 간의 승급에 필요한 기간은 1년으로 하며, 호봉은 매달 1일자로 승급한다. 호봉 승급 산정일 기준, 제7조 제3호에 따른 잔여기간을 포함하여 승급에 필요한 기간을 충족한 경우에는 승급한다.<\/div><div class=\"ln p\">2. 승진에 관한 사항은 사회복지직의 경우는 &lt;별표6&gt; 직위별 승진 최소 소요연한에 따라, 사회복지직 외의 직종은 &lt;별표7&gt; 직급별 승진 최소 소요연한에 따라, 기관장의 인사권에 의하여 승진한다. 단, 장애인복지관 일반직(기능직, 고용직 제외)의 승진 최소소요연한은 개별지침 등 별도기준을 적용한다.<\/div><div class=\"ln p\">3. 사회복지직의 선임사회복지사로의 승진 및 사회복지직 외 직종의 3급으로의 승진(단, 의료직의 경우 최초 3급을 부여받은 자의 2급 승진 포함)에 필요한 최소 소요 연한을 충족하는 경우 당연승진을 적용하도록 노력하여야 하며, 별도 기준이 있는 경우 이를 우선 적용한다.<\/div><div class=\"ln p\">4. 승진에 필요한 “직위 및 직급별 최소 소요연한”이라함은 사회복지직 및 사무직, 의료직, 관리직, 기타 직종 등 모든 직종에 적용되고, 해당 직위에서의 실 근무경력을 말하며, 동일 유형의 시설 또는 동일 법인 내 시설 근무경력을 적용한다. 이 때 동일 유형이란 &lt;별표9&gt;의 세부 종류에 표기된 시설의 세부 유형을 의미한다.<\/div><div class=\"ln p\">제9조(승급의 제한) 다음 각 호에 해당하는 자는 해당 기간 동안 승급시킬 수 없다.<\/div><div class=\"ln p\">1. 징계처분, 직위해제, 또는 휴직(「남녀고용평등과 일·가정 양립지원에 관한 법률」상의 육아휴직과 업무상 질병으로 인한 휴직은 제외한다.) 중에 있는 자.<\/div><div class=\"ln p\">2. 징계처분이 종료된 날로부터 일정 기간(정직：18월, 감봉：12월, 근신 또는 견책：6월)이 경과되지 아니한 자.<\/div><div class=\"ln p\">제4장 보수의 지급<\/div><div class=\"ln p\">제10조(보수의 지급방법) 보수는 본인에게 직접 현금 또는 요구불 예금으로 지급하되, 출장 기타 부득이한 사유로 인하여 본인에게 직접 지급할 수 없을 때는 본인이 지정하는 자에게 지급할 수 있다.<\/div><div class=\"ln p\">1. 보수는 사회서비스정보시스템의 종사자 급여 및 회계 관리를 이용하여 인건비 지급 항목 및 재원별로 급여 대장 및 급여명세서를 입력하는 것을 권장한다.<\/div><div class=\"ln p\">제11조(보수계산) 보수는 특별한 규정이 있는 경우를 제외하고는 신규 채용 등의 경우에 있어서 발령일을 기준으로 그 월액을 일할 계산하여 지급한다.<\/div><div class=\"ln p\">제12조(보수지급일) 보수는 매월 운영법인에서 따로 정하는 날에 지급할 수 있으며 다만, 지급일이 공휴일인 경우에는 그 전일에 지급한다.<\/div><div class=\"ln p\">제5장 수  당<\/div>", "pages": [{"p": 5, "t": "제3장 호봉 획정 및 승급\n제5조(호봉획정 및 승급시행권자) 호봉획정 및 승급은 임용권자가 시행하고, 사회복지시설을 관할하는 지방자치단체장이 해당 사회복지시설 종사자의 재직 관련 서류 등을 통해 확인하여야 한다.\n제6조(인정경력) 대상 경력은 사회복지시설 근무경력, 유사경력, 군복무근무경력 등을 말하며, 경력인정의 범위 및 환산율은 ｢사회복지시설 관리안내｣ 중 호봉의 획정 및 승급과 각 시설 유형별 개별지침을 참조하여 준용한다.\n제7조(초임호봉의 획정 및 경력년수 산정)\n1. 종사자를 신규 채용하는 경우에는 초임호봉을 획정한다.\n2. 초임호봉은 1호봉으로 하되, 제6조에 정하여진 근무경력이 있는 경우에는 경력별 근무기간 1년을 각각 1호봉씩으로 하여 초임호봉을 정한다.\n3. 초임호봉의 획정에 반영되지 아니한 1년 미만의 잔여기간이 있을 때는 그 기간을 다음 승급 기간에 산입한다.\n제8조(승급 및 승진)\n1. 호봉 간의 승급에 필요한 기간은 1년으로 하며, 호봉은 매달 1일자로 승급한다. 호봉 승급 산정일 기준, 제7조 제3호에 따른 잔여기간을 포함하여 승급에 필요한 기간을 충족한 경우에는 승급한다.\n2. 승진에 관한 사항은 사회복지직의 경우는 <별표6> 직위별 승진 최소 소요연한에 따라, 사회복지직 외의 직종은 <별표7> 직급별 승진 최소 소요연한에 따라, 기관장의 인사권에 의하여 승진한다. 단, 장애인복지관 일반직(기능직, 고용직 제외)의 승진 최소소요연한은 개별지침 등 별도기준을 적용한다.\n3. 사회복지직의 선임사회복지사로의 승진 및 사회복지직 외 직종의 3급으로의 승진(단, 의료직의 경우 최초 3급을 부여받은 자의 2급 승진 포함)에 필요한 최소 소요 연한을 충족하는 경우 당연승진을 적용하도록 노력하여야 하며, 별도 기준이 있는 경우 이를 우선 적용한다.\n4. 승진에 필요한 “직위 및 직급별 최소 소요연한”이라함은 사회복지직 및 사무직, 의료직, 관리직, 기타 직종 등 모든 직종에 적용되고, 해당 직위에서의 실 근무경력을 말하며, 동일 유형의 시설 또는 동일 법인 내 시설 근무경력을 적용한다. 이 때 동일 유형이란 <별표9>의 세부 종류에 표기된 시설의 세부 유형을 의미한다.\n제9조(승급의 제한) 다음 각 호에 해당하는 자는 해당 기간 동안 승급시킬 수 없다.\n1. 징계처분, 직위해제, 또는 휴직(「남녀고용평등과 일·가정 양립지원에 관한 법률」상의 육아휴직과 업무상 질병으로 인한 휴직은 제외한다.) 중에 있는 자.\n2. 징계처분이 종료된 날로부터 일정 기간(정직：18월, 감봉：12월, 근신 또는 견책：6월)이 경과되지 아니한 자.\n제4장 보수의 지급\n제10조(보수의 지급방법) 보수는 본인에게 직접 현금 또는 요구불 예금으로 지급하되, 출장 기타 부득이한 사유로 인하여 본인에게 직접 지급할 수 없을 때는 본인이 지정하는 자에게 지급할 수 있다.\n1. 보수는 사회서비스정보시스템의 종사자 급여 및 회계 관리를 이용하여 인건비 지급 항목 및 재원별로 급여 대장 및 급여명세서를 입력하는 것을 권장한다.\n제11조(보수계산) 보수는 특별한 규정이 있는 경우를 제외하고는 신규 채용 등의 경우에 있어서 발령일을 기준으로 그 월액을 일할 계산하여 지급한다.\n제12조(보수지급일) 보수는 매월 운영법인에서 따로 정하는 날에 지급할 수 있으며 다만, 지급일이 공휴일인 경우에는 그 전일에 지급한다.\n제5장 수  당"}]}, {"title": "제5장 수당", "start": 6, "end": 6, "html": "<div class=\"pchip\" id=\"p6\"><span>원문 6쪽<\/span> <a class=\"pdflink\" href=\"pay2026.pdf#page=6\" target=\"_blank\" rel=\"noopener\" title=\"원문 PDF 해당 쪽을 새 탭에서 엽니다(PC에서 정확 이동).\">원문 PDF ↗<\/a><\/div><div class=\"ln p\">제13조(수당의 지급) 사회복지시설 종사자의 수당은 &lt;별표8&gt;의 기준표를 참고로 하여 지방자치단체 실정에 맞게 지급할 수 있다.<\/div><div class=\"ln p\">1. (명절휴가비) 재직 중인 종사자에게 매년 명절(설, 추석)이 속하는 달에 월 봉급액의 60%를 명절휴가비로 지급한다.<\/div><div class=\"ln p\">2. (가족수당) 부양가족 1인당 월 2만원(배우자 4만원, 첫째자녀 5만원, 둘째자녀 8만원, 셋째 이후 자녀 12만원)의 가족수당을 지급한다. 부양가족의 수는 4명 이내로 하되, 자녀의 경우에는 4명을 초과하더라도 가족수당을 지급한다.<\/div><div class=\"ln p\">3. (시간외근무수당) 시간외근무에 대해서는 다음 각호에 따라 가산 지급한다.<\/div><div class=\"ln h3\">가. (연장근로 수당) 통상임금의 100분의 50 이상을 가산하여 지급한다.<\/div><div class=\"ln h3\">나. (야간근로 수당) 오후 10시부터 다음 날 오전 6시 사이의 근로에 대해서는 통상임금의 100분의 50 이상을 가산하여 지급한다.<\/div><div class=\"ln h3\">다. (휴일근로 수당) 8시간 이내의 휴일근로에 대해서는 통상임금의 100분의 50 이상을, 8시간을 초과한 휴일근로에 대해서는 통상임금의 100분의 100 이상을 가산하여 지급한다.<\/div><div class=\"ln p\">4. 제1항에서 제3항까지의 규정에 의한 수당 이외에 해당 사회복지시설의 수행사업과 운영의 특수성을 감안하여 운영법인 및 지방자치단체의 결정에 따라 자체부담 또는 정부보조금으로 별도의 수당규정을 신설하여 지급할 수 있다.<\/div><div class=\"ln p\">제6장 퇴직금<\/div><div class=\"ln p\">제14조(퇴직금) 사회복지시설 종사자의 퇴직금에 대해서는 ｢근로자퇴직급여 보장법｣에 따른다.<\/div><div class=\"ln p\">제7장 유급병가<\/div><div class=\"ln p\">제15조(유급병가)<\/div><div class=\"ln p\">1. 지방자치단체의 장 또는 운영법인·시설 등의 장은 사회복지시설 종사자가 다음 각 호의 어느 하나에 해당할 경우에는 자율적으로 정하는 범위에서 유급병가를 허가할 수 있다. 다만, ‘자율적으로 정하는 범위’는 최소 연 30일 이상이 될 것을 권고한다.<\/div><div class=\"ln h3\">가. 질병이나 부상으로 인하여 직무를 수행할 수 없을 때<\/div><div class=\"ln h3\">나. 감염병에 걸려 그 종사자의 출근이 다른 종사자의 건강에 영향을 미칠 우려가 있을 때<\/div><div class=\"ln p\">2. 병가 일수가 연간 6일을 초과하는 경우에는 의사의 진단서를 첨부하여야 한다.<\/div><div class=\"ln p\">3. 2025년 12월을 기준으로 지자체·시설별로 운영중인 유급병가제도가 있는 경우, 본 조항을 이유로 유급병가의 기간·조건 등을 종사자에게 불리하게 변경하지 않도록 하며, 구체적인 내용은 지자체·시설별 개별 지침 등을 마련하여 운영할 수 있다.<\/div><div class=\"ln p\">제8장  보  칙<\/div><div class=\"ln p\">제16조(종사자 처우수준 향상) 2026년 사회복지시설 종사자의 보수수준이 2025년에 비해 낮아지지 않도록 한다.<\/div>", "pages": [{"p": 6, "t": "제13조(수당의 지급) 사회복지시설 종사자의 수당은 <별표8>의 기준표를 참고로 하여 지방자치단체 실정에 맞게 지급할 수 있다.\n1. (명절휴가비) 재직 중인 종사자에게 매년 명절(설, 추석)이 속하는 달에 월 봉급액의 60%를 명절휴가비로 지급한다.\n2. (가족수당) 부양가족 1인당 월 2만원(배우자 4만원, 첫째자녀 5만원, 둘째자녀 8만원, 셋째 이후 자녀 12만원)의 가족수당을 지급한다. 부양가족의 수는 4명 이내로 하되, 자녀의 경우에는 4명을 초과하더라도 가족수당을 지급한다.\n3. (시간외근무수당) 시간외근무에 대해서는 다음 각호에 따라 가산 지급한다.\n가. (연장근로 수당) 통상임금의 100분의 50 이상을 가산하여 지급한다.\n나. (야간근로 수당) 오후 10시부터 다음 날 오전 6시 사이의 근로에 대해서는 통상임금의 100분의 50 이상을 가산하여 지급한다.\n다. (휴일근로 수당) 8시간 이내의 휴일근로에 대해서는 통상임금의 100분의 50 이상을, 8시간을 초과한 휴일근로에 대해서는 통상임금의 100분의 100 이상을 가산하여 지급한다.\n4. 제1항에서 제3항까지의 규정에 의한 수당 이외에 해당 사회복지시설의 수행사업과 운영의 특수성을 감안하여 운영법인 및 지방자치단체의 결정에 따라 자체부담 또는 정부보조금으로 별도의 수당규정을 신설하여 지급할 수 있다.\n제6장 퇴직금\n제14조(퇴직금) 사회복지시설 종사자의 퇴직금에 대해서는 ｢근로자퇴직급여 보장법｣에 따른다.\n제7장 유급병가\n제15조(유급병가)\n1. 지방자치단체의 장 또는 운영법인·시설 등의 장은 사회복지시설 종사자가 다음 각 호의 어느 하나에 해당할 경우에는 자율적으로 정하는 범위에서 유급병가를 허가할 수 있다. 다만, ‘자율적으로 정하는 범위’는 최소 연 30일 이상이 될 것을 권고한다.\n가. 질병이나 부상으로 인하여 직무를 수행할 수 없을 때\n나. 감염병에 걸려 그 종사자의 출근이 다른 종사자의 건강에 영향을 미칠 우려가 있을 때\n2. 병가 일수가 연간 6일을 초과하는 경우에는 의사의 진단서를 첨부하여야 한다.\n3. 2025년 12월을 기준으로 지자체·시설별로 운영중인 유급병가제도가 있는 경우, 본 조항을 이유로 유급병가의 기간·조건 등을 종사자에게 불리하게 변경하지 않도록 하며, 구체적인 내용은 지자체·시설별 개별 지침 등을 마련하여 운영할 수 있다.\n제8장  보  칙\n제16조(종사자 처우수준 향상) 2026년 사회복지시설 종사자의 보수수준이 2025년에 비해 낮아지지 않도록 한다."}]}]}, {"no": 3, "title": "별표 (기본급·수당 기준표)", "start": 7, "end": 13, "sections": [{"title": "별표 1. 생활시설·이용시설 종사자 기본급 권고 기준", "start": 7, "end": 7, "html": "<div class=\"pchip\" id=\"p7\"><span>원문 7쪽<\/span> <a class=\"pdflink\" href=\"pay2026.pdf#page=7\" target=\"_blank\" rel=\"noopener\" title=\"원문 PDF 해당 쪽을 새 탭에서 엽니다(PC에서 정확 이동).\">원문 PDF ↗<\/a><\/div><div class=\"ln p\">별표 1. 2026년 사회복지시설(생활시설, 이용시설) 종사자 기본급 권고 기준                                                              (단위: 원/월)<\/div><table class=\"htbl\"><tr><td rowspan=\"3\">직위<br>(호봉)<\/td><td>생활시설<\/td><td>원장<\/td><td>-<\/td><td>사무국장<\/td><td>과장, 생활복지사<\/td><td>선임 생활지도원<\/td><td>생활지도원<\/td><td>-<\/td><td>관리직<\/td><td>기능직<\/td><\/tr><tr><td>(사회,노인) 이용시설_사회복지직<\/td><td>관장<\/td><td>-<\/td><td>부장<\/td><td>과장<\/td><td>선임사회복지사<\/td><td>사회복지사<\/td><td>-<\/td><td>-<\/td><td>-<\/td><\/tr><tr><td>(장애인)이용시설_일반직<\/td><td>관장<\/td><td>사무국장<\/td><td>1급<\/td><td>2급<\/td><td>3급<\/td><td>4급<\/td><td>5급<\/td><td>-<\/td><td>-<\/td><\/tr><tr><td colspan=\"2\">1호봉<\/td><td>2,980,600<\/td><td>2,814,200<\/td><td>2,683,200<\/td><td>2,477,200<\/td><td>2,360,100<\/td><td>2,281,800<\/td><td>2,232,300<\/td><td>2,225,400<\/td><td>2,197,000<\/td><\/tr><tr><td colspan=\"2\">2호봉<\/td><td>3,082,400<\/td><td>2,906,400<\/td><td>2,769,600<\/td><td>2,538,600<\/td><td>2,416,400<\/td><td>2,324,300<\/td><td>2,296,400<\/td><td>2,264,500<\/td><td>2,222,100<\/td><\/tr><tr><td colspan=\"2\">3호봉<\/td><td>3,186,800<\/td><td>3,011,200<\/td><td>2,870,500<\/td><td>2,606,200<\/td><td>2,485,000<\/td><td>2,366,500<\/td><td>2,335,000<\/td><td>2,308,600<\/td><td>2,261,100<\/td><\/tr><tr><td colspan=\"2\">4호봉<\/td><td>3,305,300<\/td><td>3,113,700<\/td><td>2,973,900<\/td><td>2,712,200<\/td><td>2,553,200<\/td><td>2,411,500<\/td><td>2,380,400<\/td><td>2,351,200<\/td><td>2,302,700<\/td><\/tr><tr><td colspan=\"2\">5호봉<\/td><td>3,440,900<\/td><td>3,230,900<\/td><td>3,095,900<\/td><td>2,824,500<\/td><td>2,621,900<\/td><td>2,475,400<\/td><td>2,439,000<\/td><td>2,399,600<\/td><td>2,343,500<\/td><\/tr><tr><td colspan=\"2\">6호봉<\/td><td>3,582,800<\/td><td>3,358,400<\/td><td>3,221,100<\/td><td>2,940,500<\/td><td>2,717,800<\/td><td>2,538,700<\/td><td>2,509,400<\/td><td>2,440,300<\/td><td>2,396,200<\/td><\/tr><tr><td colspan=\"2\">7호봉<\/td><td>3,724,600<\/td><td>3,485,400<\/td><td>3,345,900<\/td><td>3,061,500<\/td><td>2,815,600<\/td><td>2,633,500<\/td><td>2,606,600<\/td><td>2,524,700<\/td><td>2,435,800<\/td><\/tr><tr><td colspan=\"2\">8호봉<\/td><td>3,871,200<\/td><td>3,631,900<\/td><td>3,489,100<\/td><td>3,183,000<\/td><td>2,918,600<\/td><td>2,737,600<\/td><td>2,702,000<\/td><td>2,615,600<\/td><td>2,500,200<\/td><\/tr><tr><td colspan=\"2\">9호봉<\/td><td>4,018,900<\/td><td>3,778,400<\/td><td>3,637,600<\/td><td>3,301,000<\/td><td>3,037,600<\/td><td>2,835,500<\/td><td>2,782,200<\/td><td>2,689,400<\/td><td>2,579,300<\/td><\/tr><tr><td colspan=\"2\">10호봉<\/td><td>4,159,300<\/td><td>3,921,300<\/td><td>3,778,200<\/td><td>3,426,800<\/td><td>3,137,400<\/td><td>2,921,200<\/td><td>2,870,900<\/td><td>2,783,500<\/td><td>2,667,700<\/td><\/tr><\/table><table class=\"htbl\"><tr><td rowspan=\"3\">직위<br>(호봉)<\/td><td>생활시설<\/td><td>원장<\/td><td>-<\/td><td>사무국장<\/td><td>과장, 생활복지사<\/td><td>선임 생활지도원<\/td><td>생활지도원<\/td><td>-<\/td><td>관리직<\/td><td>기능직<\/td><\/tr><tr><td colspan=\"2\">11호봉<\/td><td>4,310,200<\/td><td>4,051,900<\/td><td>3,915,700<\/td><td>3,542,900<\/td><td>3,237,200<\/td><td>2,997,200<\/td><td>2,940,100<\/td><td>2,851,500<\/td><td>2,736,000<\/td><\/tr><tr><td colspan=\"2\">12호봉<\/td><td>4,437,500<\/td><td>4,170,300<\/td><td>4,027,400<\/td><td>3,647,900<\/td><td>3,326,300<\/td><td>3,062,600<\/td><td>3,009,300<\/td><td>2,928,400<\/td><td>2,802,700<\/td><\/tr><tr><td colspan=\"2\">13호봉<\/td><td>4,556,000<\/td><td>4,275,500<\/td><td>4,132,400<\/td><td>3,739,600<\/td><td>3,401,300<\/td><td>3,125,400<\/td><td>3,063,800<\/td><td>2,996,600<\/td><td>2,872,800<\/td><\/tr><tr><td colspan=\"2\">14호봉<\/td><td>4,652,800<\/td><td>4,374,200<\/td><td>4,231,300<\/td><td>3,828,600<\/td><td>3,482,900<\/td><td>3,189,500<\/td><td>3,112,300<\/td><td>3,035,600<\/td><td>2,925,900<\/td><\/tr><tr><td colspan=\"2\">15호봉<\/td><td>4,750,300<\/td><td>4,468,200<\/td><td>4,326,700<\/td><td>3,914,000<\/td><td>3,561,300<\/td><td>3,255,800<\/td><td>3,171,500<\/td><td>3,070,000<\/td><td>2,972,100<\/td><\/tr><tr><td colspan=\"2\">16호봉<\/td><td>4,842,600<\/td><td>4,558,300<\/td><td>4,402,200<\/td><td>3,994,600<\/td><td>3,636,700<\/td><td>3,328,000<\/td><td>3,226,400<\/td><td>3,129,800<\/td><td>3,018,100<\/td><\/tr><tr><td colspan=\"2\">17호봉<\/td><td>4,929,200<\/td><td>4,634,500<\/td><td>4,481,600<\/td><td>4,071,400<\/td><td>3,707,600<\/td><td>3,399,600<\/td><td>3,278,900<\/td><td>3,188,400<\/td><td>3,076,100<\/td><\/tr><tr><td colspan=\"2\">18호봉<\/td><td>5,011,100<\/td><td>4,712,700<\/td><td>4,561,200<\/td><td>4,146,100<\/td><td>3,775,900<\/td><td>3,467,900<\/td><td>3,341,200<\/td><td>3,246,900<\/td><td>3,132,500<\/td><\/tr><tr><td colspan=\"2\">19호봉<\/td><td>5,087,700<\/td><td>4,787,300<\/td><td>4,632,100<\/td><td>4,212,000<\/td><td>3,839,400<\/td><td>3,529,400<\/td><td>3,402,400<\/td><td>3,296,500<\/td><td>3,192,200<\/td><\/tr><tr><td colspan=\"2\">20호봉<\/td><td>5,156,000<\/td><td>4,858,100<\/td><td>4,700,700<\/td><td>4,277,800<\/td><td>3,901,200<\/td><td>3,589,300<\/td><td>3,464,100<\/td><td>3,344,300<\/td><td>3,242,500<\/td><\/tr><tr><td colspan=\"2\">21호봉<\/td><td>5,223,300<\/td><td>4,921,800<\/td><td>4,767,900<\/td><td>4,338,700<\/td><td>3,964,000<\/td><td>3,643,100<\/td><td>3,519,000<\/td><td>3,401,500<\/td><td>3,299,100<\/td><\/tr><tr><td colspan=\"2\">22호봉<\/td><td>5,287,900<\/td><td>4,981,600<\/td><td>4,829,900<\/td><td>4,397,700<\/td><td>4,018,500<\/td><td>3,697,400<\/td><td>3,568,800<\/td><td>3,466,200<\/td><td>3,364,200<\/td><\/tr><\/table><table class=\"htbl\"><tr><td rowspan=\"3\">직위<br>(호봉)<\/td><td>생활시설<\/td><td>원장<\/td><td>-<\/td><td>사무국장<\/td><td>과장, 생활복지사<\/td><td>선임 생활지도원<\/td><td>생활지도원<\/td><td>-<\/td><td>관리직<\/td><td>기능직<\/td><\/tr><tr><td colspan=\"2\">23호봉<\/td><td>5,348,200<\/td><td>5,041,500<\/td><td>4,888,800<\/td><td>4,453,600<\/td><td>4,070,900<\/td><td>3,747,100<\/td><td>3,626,000<\/td><td>3,533,200<\/td><td>3,428,600<\/td><\/tr><tr><td colspan=\"2\">24호봉<\/td><td>5,404,900<\/td><td>5,098,900<\/td><td>4,943,900<\/td><td>4,502,900<\/td><td>4,121,000<\/td><td>3,796,000<\/td><td>3,674,500<\/td><td>3,595,400<\/td><td>3,492,000<\/td><\/tr><tr><td colspan=\"2\">25호봉<\/td><td>5,460,400<\/td><td>5,151,500<\/td><td>4,998,800<\/td><td>4,551,900<\/td><td>4,174,400<\/td><td>3,842,500<\/td><td>3,725,400<\/td><td>3,652,800<\/td><td>3,555,900<\/td><\/tr><tr><td colspan=\"2\">26호봉<\/td><td>5,505,800<\/td><td>5,202,700<\/td><td>5,046,700<\/td><td>4,599,700<\/td><td>4,221,600<\/td><td>3,885,100<\/td><td>3,770,900<\/td><td>3,703,100<\/td><td>3,615,100<\/td><\/tr><tr><td colspan=\"2\">27호봉<\/td><td>5,552,100<\/td><td>5,246,800<\/td><td>5,091,700<\/td><td>4,640,000<\/td><td>4,260,000<\/td><td>3,921,800<\/td><td>3,807,600<\/td><td>3,752,400<\/td><td>3,664,400<\/td><\/tr><tr><td colspan=\"2\">28호봉<\/td><td>5,592,400<\/td><td>5,281,200<\/td><td>5,132,200<\/td><td>4,680,800<\/td><td>4,300,400<\/td><td>3,957,900<\/td><td>3,833,000<\/td><td>3,786,500<\/td><td>3,701,100<\/td><\/tr><tr><td colspan=\"2\">29호봉<\/td><td>5,623,300<\/td><td>5,313,200<\/td><td>5,166,100<\/td><td>4,718,300<\/td><td>4,337,900<\/td><td>3,992,800<\/td><td>3,853,700<\/td><td>3,824,700<\/td><td>3,739,500<\/td><\/tr><tr><td colspan=\"2\">30호봉<\/td><td>5,649,300<\/td><td>5,346,400<\/td><td>5,202,100<\/td><td>4,753,400<\/td><td>4,371,900<\/td><td>4,025,800<\/td><td>3,874,600<\/td><td>3,848,100<\/td><td>3,773,500<\/td><\/tr><tr><td colspan=\"2\">31호봉<\/td><td>-<\/td><td>5,359,900<\/td><td>5,235,300<\/td><td>4,785,000<\/td><td>4,405,000<\/td><td>4,057,900<\/td><td>3,898,000<\/td><td>3,887,700<\/td><td>3,799,800<\/td><\/tr><\/table><div class=\"ln note\">※ 생활시설의 관리직(관리인, 경비원 등), 기능직(조리원, 위생원 등), ※ 촉탁의사 기본급 권고 기준 : 3,266,700원<\/div><div class=\"ln note\">※ 사회복지직 : 사회복지사 1, 2급 및 각 개별법령 등에서 관장, 부장, 과장 등의 자격을 인정한 자<\/div><div class=\"ln note\">※ 이용시설의 사회복지직, 일반직 외 직종은 별표2.~별표5. 적용<\/div>", "pages": [{"p": 7, "t": "별표 1. 2026년 사회복지시설(생활시설, 이용시설) 종사자 기본급 권고 기준                                                              (단위: 원/월)\n직위 (호봉) | 생활시설 | 원장 | - | 사무국장 | 과장, 생활복지사 | 선임 생활지도원 | 생활지도원 | - | 관리직 | 기능직\n(사회,노인) 이용시설_사회복지직 | 관장 | - | 부장 | 과장 | 선임사회복지사 | 사회복지사 | - | - | -\n(장애인)이용시설_일반직 | 관장 | 사무국장 | 1급 | 2급 | 3급 | 4급 | 5급 | - | -\n1호봉 | 2,980,600 | 2,814,200 | 2,683,200 | 2,477,200 | 2,360,100 | 2,281,800 | 2,232,300 | 2,225,400 | 2,197,000\n2호봉 | 3,082,400 | 2,906,400 | 2,769,600 | 2,538,600 | 2,416,400 | 2,324,300 | 2,296,400 | 2,264,500 | 2,222,100\n3호봉 | 3,186,800 | 3,011,200 | 2,870,500 | 2,606,200 | 2,485,000 | 2,366,500 | 2,335,000 | 2,308,600 | 2,261,100\n4호봉 | 3,305,300 | 3,113,700 | 2,973,900 | 2,712,200 | 2,553,200 | 2,411,500 | 2,380,400 | 2,351,200 | 2,302,700\n5호봉 | 3,440,900 | 3,230,900 | 3,095,900 | 2,824,500 | 2,621,900 | 2,475,400 | 2,439,000 | 2,399,600 | 2,343,500\n6호봉 | 3,582,800 | 3,358,400 | 3,221,100 | 2,940,500 | 2,717,800 | 2,538,700 | 2,509,400 | 2,440,300 | 2,396,200\n7호봉 | 3,724,600 | 3,485,400 | 3,345,900 | 3,061,500 | 2,815,600 | 2,633,500 | 2,606,600 | 2,524,700 | 2,435,800\n8호봉 | 3,871,200 | 3,631,900 | 3,489,100 | 3,183,000 | 2,918,600 | 2,737,600 | 2,702,000 | 2,615,600 | 2,500,200\n9호봉 | 4,018,900 | 3,778,400 | 3,637,600 | 3,301,000 | 3,037,600 | 2,835,500 | 2,782,200 | 2,689,400 | 2,579,300\n10호봉 | 4,159,300 | 3,921,300 | 3,778,200 | 3,426,800 | 3,137,400 | 2,921,200 | 2,870,900 | 2,783,500 | 2,667,700\n직위 (호봉) | 생활시설 | 원장 | - | 사무국장 | 과장, 생활복지사 | 선임 생활지도원 | 생활지도원 | - | 관리직 | 기능직\n11호봉 | 4,310,200 | 4,051,900 | 3,915,700 | 3,542,900 | 3,237,200 | 2,997,200 | 2,940,100 | 2,851,500 | 2,736,000\n12호봉 | 4,437,500 | 4,170,300 | 4,027,400 | 3,647,900 | 3,326,300 | 3,062,600 | 3,009,300 | 2,928,400 | 2,802,700\n13호봉 | 4,556,000 | 4,275,500 | 4,132,400 | 3,739,600 | 3,401,300 | 3,125,400 | 3,063,800 | 2,996,600 | 2,872,800\n14호봉 | 4,652,800 | 4,374,200 | 4,231,300 | 3,828,600 | 3,482,900 | 3,189,500 | 3,112,300 | 3,035,600 | 2,925,900\n15호봉 | 4,750,300 | 4,468,200 | 4,326,700 | 3,914,000 | 3,561,300 | 3,255,800 | 3,171,500 | 3,070,000 | 2,972,100\n16호봉 | 4,842,600 | 4,558,300 | 4,402,200 | 3,994,600 | 3,636,700 | 3,328,000 | 3,226,400 | 3,129,800 | 3,018,100\n17호봉 | 4,929,200 | 4,634,500 | 4,481,600 | 4,071,400 | 3,707,600 | 3,399,600 | 3,278,900 | 3,188,400 | 3,076,100\n18호봉 | 5,011,100 | 4,712,700 | 4,561,200 | 4,146,100 | 3,775,900 | 3,467,900 | 3,341,200 | 3,246,900 | 3,132,500\n19호봉 | 5,087,700 | 4,787,300 | 4,632,100 | 4,212,000 | 3,839,400 | 3,529,400 | 3,402,400 | 3,296,500 | 3,192,200\n20호봉 | 5,156,000 | 4,858,100 | 4,700,700 | 4,277,800 | 3,901,200 | 3,589,300 | 3,464,100 | 3,344,300 | 3,242,500\n21호봉 | 5,223,300 | 4,921,800 | 4,767,900 | 4,338,700 | 3,964,000 | 3,643,100 | 3,519,000 | 3,401,500 | 3,299,100\n22호봉 | 5,287,900 | 4,981,600 | 4,829,900 | 4,397,700 | 4,018,500 | 3,697,400 | 3,568,800 | 3,466,200 | 3,364,200\n직위 (호봉) | 생활시설 | 원장 | - | 사무국장 | 과장, 생활복지사 | 선임 생활지도원 | 생활지도원 | - | 관리직 | 기능직\n23호봉 | 5,348,200 | 5,041,500 | 4,888,800 | 4,453,600 | 4,070,900 | 3,747,100 | 3,626,000 | 3,533,200 | 3,428,600\n24호봉 | 5,404,900 | 5,098,900 | 4,943,900 | 4,502,900 | 4,121,000 | 3,796,000 | 3,674,500 | 3,595,400 | 3,492,000\n25호봉 | 5,460,400 | 5,151,500 | 4,998,800 | 4,551,900 | 4,174,400 | 3,842,500 | 3,725,400 | 3,652,800 | 3,555,900\n26호봉 | 5,505,800 | 5,202,700 | 5,046,700 | 4,599,700 | 4,221,600 | 3,885,100 | 3,770,900 | 3,703,100 | 3,615,100\n27호봉 | 5,552,100 | 5,246,800 | 5,091,700 | 4,640,000 | 4,260,000 | 3,921,800 | 3,807,600 | 3,752,400 | 3,664,400\n28호봉 | 5,592,400 | 5,281,200 | 5,132,200 | 4,680,800 | 4,300,400 | 3,957,900 | 3,833,000 | 3,786,500 | 3,701,100\n29호봉 | 5,623,300 | 5,313,200 | 5,166,100 | 4,718,300 | 4,337,900 | 3,992,800 | 3,853,700 | 3,824,700 | 3,739,500\n30호봉 | 5,649,300 | 5,346,400 | 5,202,100 | 4,753,400 | 4,371,900 | 4,025,800 | 3,874,600 | 3,848,100 | 3,773,500\n31호봉 | - | 5,359,900 | 5,235,300 | 4,785,000 | 4,405,000 | 4,057,900 | 3,898,000 | 3,887,700 | 3,799,800\n※ 생활시설의 관리직(관리인, 경비원 등), 기능직(조리원, 위생원 등), ※ 촉탁의사 기본급 권고 기준 : 3,266,700원\n※ 사회복지직 : 사회복지사 1, 2급 및 각 개별법령 등에서 관장, 부장, 과장 등의 자격을 인정한 자\n※ 이용시설의 사회복지직, 일반직 외 직종은 별표2.~별표5. 적용"}]}, {"title": "별표 2. 이용시설 의료직 기본급", "start": 8, "end": 8, "html": "<div class=\"pchip\" id=\"p8\"><span>원문 8쪽<\/span> <a class=\"pdflink\" href=\"pay2026.pdf#page=8\" target=\"_blank\" rel=\"noopener\" title=\"원문 PDF 해당 쪽을 새 탭에서 엽니다(PC에서 정확 이동).\">원문 PDF ↗<\/a><\/div><div class=\"ln p\">별표 2. 2026년 사회복지이용시설 종사자 기본급 권고 기준(의료직)<\/div><div class=\"ln p\">(단위: 원/월)<\/div><table class=\"htbl\"><tr><td>직위<br>(호봉)<\/td><td>1급<\/td><td>2급<\/td><td>3급<\/td><td>4급<\/td><\/tr><tr><td>1호봉<\/td><td>2,395,400<\/td><td>2,346,100<\/td><td>2,297,300<\/td><td>2,240,300<\/td><\/tr><tr><td>2호봉<\/td><td>2,451,700<\/td><td>2,392,100<\/td><td>2,342,900<\/td><td>2,296,600<\/td><\/tr><tr><td>3호봉<\/td><td>2,520,500<\/td><td>2,450,600<\/td><td>2,391,000<\/td><td>2,339,000<\/td><\/tr><tr><td>4호봉<\/td><td>2,616,800<\/td><td>2,517,300<\/td><td>2,449,600<\/td><td>2,390,000<\/td><\/tr><tr><td>5호봉<\/td><td>2,718,100<\/td><td>2,615,800<\/td><td>2,515,100<\/td><td>2,448,500<\/td><\/tr><tr><td>6호봉<\/td><td>2,804,300<\/td><td>2,717,000<\/td><td>2,613,600<\/td><td>2,513,000<\/td><\/tr><tr><td>7호봉<\/td><td>2,909,400<\/td><td>2,803,100<\/td><td>2,714,900<\/td><td>2,612,600<\/td><\/tr><tr><td>8호봉<\/td><td>3,011,300<\/td><td>2,900,300<\/td><td>2,792,600<\/td><td>2,712,800<\/td><\/tr><tr><td>9호봉<\/td><td>3,133,600<\/td><td>2,969,400<\/td><td>2,881,900<\/td><td>2,788,500<\/td><\/tr><tr><td>10호봉<\/td><td>3,216,600<\/td><td>3,049,700<\/td><td>2,954,400<\/td><td>2,879,400<\/td><\/tr><tr><td>11호봉<\/td><td>3,332,200<\/td><td>3,100,700<\/td><td>3,035,100<\/td><td>2,947,000<\/td><\/tr><tr><td>12호봉<\/td><td>3,426,500<\/td><td>3,188,600<\/td><td>3,082,100<\/td><td>3,018,700<\/td><\/tr><\/table><table class=\"htbl\"><tr><td>직위<br>(호봉)<\/td><td>1급<\/td><td>2급<\/td><td>3급<\/td><td>4급<\/td><\/tr><tr><td>13호봉<\/td><td>3,494,800<\/td><td>3,269,000<\/td><td>3,162,200<\/td><td>3,070,100<\/td><\/tr><tr><td>14호봉<\/td><td>3,557,000<\/td><td>3,347,000<\/td><td>3,238,500<\/td><td>3,120,600<\/td><\/tr><tr><td>15호봉<\/td><td>3,613,200<\/td><td>3,408,100<\/td><td>3,294,600<\/td><td>3,177,400<\/td><\/tr><tr><td>16호봉<\/td><td>3,668,300<\/td><td>3,469,200<\/td><td>3,352,300<\/td><td>3,233,500<\/td><\/tr><tr><td>17호봉<\/td><td>3,730,500<\/td><td>3,527,800<\/td><td>3,406,000<\/td><td>3,284,900<\/td><\/tr><tr><td>18호봉<\/td><td>3,790,500<\/td><td>3,588,900<\/td><td>3,459,800<\/td><td>3,361,200<\/td><\/tr><tr><td>19호봉<\/td><td>3,853,900<\/td><td>3,647,400<\/td><td>3,518,300<\/td><td>3,426,000<\/td><\/tr><tr><td>20호봉<\/td><td>3,911,300<\/td><td>3,706,000<\/td><td>3,575,900<\/td><td>3,492,500<\/td><\/tr><tr><td>21호봉<\/td><td>3,971,300<\/td><td>3,765,900<\/td><td>3,631,900<\/td><td>3,551,400<\/td><\/tr><tr><td>22호봉<\/td><td>4,030,100<\/td><td>3,829,300<\/td><td>3,691,600<\/td><td>3,577,100<\/td><\/tr><tr><td>23호봉<\/td><td>4,087,400<\/td><td>3,882,200<\/td><td>3,750,300<\/td><td>3,636,300<\/td><\/tr><tr><td>24호봉<\/td><td>4,143,700<\/td><td>3,939,600<\/td><td>3,806,600<\/td><td>3,693,100<\/td><\/tr><\/table><table class=\"htbl\"><tr><td>직위<br>(호봉)<\/td><td>1급<\/td><td>2급<\/td><td>3급<\/td><td>4급<\/td><\/tr><tr><td>25호봉<\/td><td>4,198,700<\/td><td>3,992,300<\/td><td>3,862,700<\/td><td>3,740,600<\/td><\/tr><tr><td>26호봉<\/td><td>4,254,800<\/td><td>4,042,200<\/td><td>3,915,400<\/td><td>3,770,900<\/td><\/tr><tr><td>27호봉<\/td><td>4,291,800<\/td><td>4,087,600<\/td><td>3,965,300<\/td><td>3,813,400<\/td><\/tr><tr><td>28호봉<\/td><td>4,331,900<\/td><td>4,117,100<\/td><td>4,006,700<\/td><td>3,851,700<\/td><\/tr><tr><td>29호봉<\/td><td>4,369,300<\/td><td>4,132,500<\/td><td>4,026,900<\/td><td>3,862,900<\/td><\/tr><tr><td>30호봉<\/td><td>4,411,700<\/td><td>4,159,200<\/td><td>4,053,200<\/td><td>3,887,300<\/td><\/tr><\/table><div class=\"ln note\">※ 의료직 : 간호사, 간호조무사, 특수교사, 물리치료사, 작업치료사, 임상심리사, 영양사 등<\/div><div class=\"ln note\">※ 최초 직급 부여 : 간호사, 물리치료사, 작업치료사, 특수교사, 영양사 → 3급 / 간호조무사 → 4급<\/div>", "pages": [{"p": 8, "t": "별표 2. 2026년 사회복지이용시설 종사자 기본급 권고 기준(의료직)\n(단위: 원/월)\n직위 (호봉) | 1급 | 2급 | 3급 | 4급\n1호봉 | 2,395,400 | 2,346,100 | 2,297,300 | 2,240,300\n2호봉 | 2,451,700 | 2,392,100 | 2,342,900 | 2,296,600\n3호봉 | 2,520,500 | 2,450,600 | 2,391,000 | 2,339,000\n4호봉 | 2,616,800 | 2,517,300 | 2,449,600 | 2,390,000\n5호봉 | 2,718,100 | 2,615,800 | 2,515,100 | 2,448,500\n6호봉 | 2,804,300 | 2,717,000 | 2,613,600 | 2,513,000\n7호봉 | 2,909,400 | 2,803,100 | 2,714,900 | 2,612,600\n8호봉 | 3,011,300 | 2,900,300 | 2,792,600 | 2,712,800\n9호봉 | 3,133,600 | 2,969,400 | 2,881,900 | 2,788,500\n10호봉 | 3,216,600 | 3,049,700 | 2,954,400 | 2,879,400\n11호봉 | 3,332,200 | 3,100,700 | 3,035,100 | 2,947,000\n12호봉 | 3,426,500 | 3,188,600 | 3,082,100 | 3,018,700\n직위 (호봉) | 1급 | 2급 | 3급 | 4급\n13호봉 | 3,494,800 | 3,269,000 | 3,162,200 | 3,070,100\n14호봉 | 3,557,000 | 3,347,000 | 3,238,500 | 3,120,600\n15호봉 | 3,613,200 | 3,408,100 | 3,294,600 | 3,177,400\n16호봉 | 3,668,300 | 3,469,200 | 3,352,300 | 3,233,500\n17호봉 | 3,730,500 | 3,527,800 | 3,406,000 | 3,284,900\n18호봉 | 3,790,500 | 3,588,900 | 3,459,800 | 3,361,200\n19호봉 | 3,853,900 | 3,647,400 | 3,518,300 | 3,426,000\n20호봉 | 3,911,300 | 3,706,000 | 3,575,900 | 3,492,500\n21호봉 | 3,971,300 | 3,765,900 | 3,631,900 | 3,551,400\n22호봉 | 4,030,100 | 3,829,300 | 3,691,600 | 3,577,100\n23호봉 | 4,087,400 | 3,882,200 | 3,750,300 | 3,636,300\n24호봉 | 4,143,700 | 3,939,600 | 3,806,600 | 3,693,100\n직위 (호봉) | 1급 | 2급 | 3급 | 4급\n25호봉 | 4,198,700 | 3,992,300 | 3,862,700 | 3,740,600\n26호봉 | 4,254,800 | 4,042,200 | 3,915,400 | 3,770,900\n27호봉 | 4,291,800 | 4,087,600 | 3,965,300 | 3,813,400\n28호봉 | 4,331,900 | 4,117,100 | 4,006,700 | 3,851,700\n29호봉 | 4,369,300 | 4,132,500 | 4,026,900 | 3,862,900\n30호봉 | 4,411,700 | 4,159,200 | 4,053,200 | 3,887,300\n※ 의료직 : 간호사, 간호조무사, 특수교사, 물리치료사, 작업치료사, 임상심리사, 영양사 등\n※ 최초 직급 부여 : 간호사, 물리치료사, 작업치료사, 특수교사, 영양사 → 3급 / 간호조무사 → 4급"}]}, {"title": "별표 3. 이용시설 사무직 기본급", "start": 9, "end": 9, "html": "<div class=\"pchip\" id=\"p9\"><span>원문 9쪽<\/span> <a class=\"pdflink\" href=\"pay2026.pdf#page=9\" target=\"_blank\" rel=\"noopener\" title=\"원문 PDF 해당 쪽을 새 탭에서 엽니다(PC에서 정확 이동).\">원문 PDF ↗<\/a><\/div><div class=\"ln p\">별표 3. 2026년 사회복지이용시설 종사자 기본급 권고 기준(사무직)<\/div><div class=\"ln p\">(단위: 원/월)<\/div><table class=\"htbl\"><tr><td>직위<br>(호봉)<\/td><td>1급<\/td><td>2급<\/td><td>3급<\/td><td>4급<\/td><\/tr><tr><td>1호봉<\/td><td>2,388,000<\/td><td>2,339,300<\/td><td>2,298,500<\/td><td>2,232,300<\/td><\/tr><tr><td>2호봉<\/td><td>2,446,800<\/td><td>2,386,100<\/td><td>2,337,100<\/td><td>2,296,400<\/td><\/tr><tr><td>3호봉<\/td><td>2,517,400<\/td><td>2,444,800<\/td><td>2,384,000<\/td><td>2,335,000<\/td><\/tr><tr><td>4호봉<\/td><td>2,614,100<\/td><td>2,515,400<\/td><td>2,442,300<\/td><td>2,380,400<\/td><\/tr><tr><td>5호봉<\/td><td>2,709,800<\/td><td>2,612,500<\/td><td>2,512,800<\/td><td>2,439,000<\/td><\/tr><tr><td>6호봉<\/td><td>2,790,300<\/td><td>2,707,600<\/td><td>2,610,100<\/td><td>2,509,400<\/td><\/tr><tr><td>7호봉<\/td><td>2,878,600<\/td><td>2,788,100<\/td><td>2,705,300<\/td><td>2,606,600<\/td><\/tr><tr><td>8호봉<\/td><td>2,947,800<\/td><td>2,877,000<\/td><td>2,786,000<\/td><td>2,702,000<\/td><\/tr><tr><td>9호봉<\/td><td>3,033,000<\/td><td>2,945,900<\/td><td>2,875,000<\/td><td>2,782,200<\/td><\/tr><tr><td>10호봉<\/td><td>3,136,200<\/td><td>3,015,000<\/td><td>2,943,900<\/td><td>2,870,900<\/td><\/tr><tr><td>11호봉<\/td><td>3,225,000<\/td><td>3,069,500<\/td><td>3,012,900<\/td><td>2,940,100<\/td><\/tr><tr><td>12호봉<\/td><td>3,309,400<\/td><td>3,121,400<\/td><td>3,067,100<\/td><td>3,009,300<\/td><\/tr><\/table><table class=\"htbl\"><tr><td>직위<br>(호봉)<\/td><td>1급<\/td><td>2급<\/td><td>3급<\/td><td>4급<\/td><\/tr><tr><td>13호봉<\/td><td>3,377,700<\/td><td>3,209,300<\/td><td>3,114,100<\/td><td>3,063,800<\/td><\/tr><tr><td>14호봉<\/td><td>3,442,400<\/td><td>3,281,100<\/td><td>3,187,800<\/td><td>3,112,300<\/td><\/tr><tr><td>15호봉<\/td><td>3,498,600<\/td><td>3,345,900<\/td><td>3,245,900<\/td><td>3,171,500<\/td><\/tr><tr><td>16호봉<\/td><td>3,567,000<\/td><td>3,406,000<\/td><td>3,296,000<\/td><td>3,226,400<\/td><\/tr><tr><td>17호봉<\/td><td>3,626,700<\/td><td>3,464,300<\/td><td>3,350,800<\/td><td>3,278,900<\/td><\/tr><tr><td>18호봉<\/td><td>3,681,900<\/td><td>3,521,800<\/td><td>3,413,300<\/td><td>3,341,200<\/td><\/tr><tr><td>19호봉<\/td><td>3,741,600<\/td><td>3,584,300<\/td><td>3,467,800<\/td><td>3,402,400<\/td><\/tr><tr><td>20호봉<\/td><td>3,797,700<\/td><td>3,644,500<\/td><td>3,526,900<\/td><td>3,464,100<\/td><\/tr><tr><td>21호봉<\/td><td>3,857,700<\/td><td>3,700,500<\/td><td>3,585,400<\/td><td>3,519,000<\/td><\/tr><tr><td>22호봉<\/td><td>3,915,000<\/td><td>3,749,100<\/td><td>3,642,300<\/td><td>3,568,800<\/td><\/tr><tr><td>23호봉<\/td><td>3,976,200<\/td><td>3,807,700<\/td><td>3,695,100<\/td><td>3,626,000<\/td><\/tr><tr><td>24호봉<\/td><td>4,032,400<\/td><td>3,865,100<\/td><td>3,747,900<\/td><td>3,674,500<\/td><\/tr><\/table><table class=\"htbl\"><tr><td>직위<br>(호봉)<\/td><td>1급<\/td><td>2급<\/td><td>3급<\/td><td>4급<\/td><\/tr><tr><td>25호봉<\/td><td>4,086,200<\/td><td>3,919,000<\/td><td>3,804,100<\/td><td>3,725,400<\/td><\/tr><tr><td>26호봉<\/td><td>4,138,800<\/td><td>3,969,100<\/td><td>3,856,700<\/td><td>3,770,900<\/td><\/tr><tr><td>27호봉<\/td><td>4,194,900<\/td><td>4,010,600<\/td><td>3,909,500<\/td><td>3,807,600<\/td><\/tr><tr><td>28호봉<\/td><td>4,240,100<\/td><td>4,050,700<\/td><td>3,953,300<\/td><td>3,833,000<\/td><\/tr><tr><td>29호봉<\/td><td>4,289,300<\/td><td>4,066,400<\/td><td>3,974,700<\/td><td>3,853,700<\/td><\/tr><tr><td>30호봉<\/td><td>4,331,300<\/td><td>4,099,900<\/td><td>3,999,900<\/td><td>3,874,600<\/td><\/tr><tr><td>31호봉<\/td><td>4,380,400<\/td><td>4,135,800<\/td><td>4,031,500<\/td><td>3,898,000<\/td><\/tr><\/table><div class=\"ln note\">※ 사무직 : 서무, 경리, 전산담당<\/div>", "pages": [{"p": 9, "t": "별표 3. 2026년 사회복지이용시설 종사자 기본급 권고 기준(사무직)\n(단위: 원/월)\n직위 (호봉) | 1급 | 2급 | 3급 | 4급\n1호봉 | 2,388,000 | 2,339,300 | 2,298,500 | 2,232,300\n2호봉 | 2,446,800 | 2,386,100 | 2,337,100 | 2,296,400\n3호봉 | 2,517,400 | 2,444,800 | 2,384,000 | 2,335,000\n4호봉 | 2,614,100 | 2,515,400 | 2,442,300 | 2,380,400\n5호봉 | 2,709,800 | 2,612,500 | 2,512,800 | 2,439,000\n6호봉 | 2,790,300 | 2,707,600 | 2,610,100 | 2,509,400\n7호봉 | 2,878,600 | 2,788,100 | 2,705,300 | 2,606,600\n8호봉 | 2,947,800 | 2,877,000 | 2,786,000 | 2,702,000\n9호봉 | 3,033,000 | 2,945,900 | 2,875,000 | 2,782,200\n10호봉 | 3,136,200 | 3,015,000 | 2,943,900 | 2,870,900\n11호봉 | 3,225,000 | 3,069,500 | 3,012,900 | 2,940,100\n12호봉 | 3,309,400 | 3,121,400 | 3,067,100 | 3,009,300\n직위 (호봉) | 1급 | 2급 | 3급 | 4급\n13호봉 | 3,377,700 | 3,209,300 | 3,114,100 | 3,063,800\n14호봉 | 3,442,400 | 3,281,100 | 3,187,800 | 3,112,300\n15호봉 | 3,498,600 | 3,345,900 | 3,245,900 | 3,171,500\n16호봉 | 3,567,000 | 3,406,000 | 3,296,000 | 3,226,400\n17호봉 | 3,626,700 | 3,464,300 | 3,350,800 | 3,278,900\n18호봉 | 3,681,900 | 3,521,800 | 3,413,300 | 3,341,200\n19호봉 | 3,741,600 | 3,584,300 | 3,467,800 | 3,402,400\n20호봉 | 3,797,700 | 3,644,500 | 3,526,900 | 3,464,100\n21호봉 | 3,857,700 | 3,700,500 | 3,585,400 | 3,519,000\n22호봉 | 3,915,000 | 3,749,100 | 3,642,300 | 3,568,800\n23호봉 | 3,976,200 | 3,807,700 | 3,695,100 | 3,626,000\n24호봉 | 4,032,400 | 3,865,100 | 3,747,900 | 3,674,500\n직위 (호봉) | 1급 | 2급 | 3급 | 4급\n25호봉 | 4,086,200 | 3,919,000 | 3,804,100 | 3,725,400\n26호봉 | 4,138,800 | 3,969,100 | 3,856,700 | 3,770,900\n27호봉 | 4,194,900 | 4,010,600 | 3,909,500 | 3,807,600\n28호봉 | 4,240,100 | 4,050,700 | 3,953,300 | 3,833,000\n29호봉 | 4,289,300 | 4,066,400 | 3,974,700 | 3,853,700\n30호봉 | 4,331,300 | 4,099,900 | 3,999,900 | 3,874,600\n31호봉 | 4,380,400 | 4,135,800 | 4,031,500 | 3,898,000\n※ 사무직 : 서무, 경리, 전산담당"}]}, {"title": "별표 4. 이용시설 관리직 기본급", "start": 10, "end": 10, "html": "<div class=\"pchip\" id=\"p10\"><span>원문 10쪽<\/span> <a class=\"pdflink\" href=\"pay2026.pdf#page=10\" target=\"_blank\" rel=\"noopener\" title=\"원문 PDF 해당 쪽을 새 탭에서 엽니다(PC에서 정확 이동).\">원문 PDF ↗<\/a><\/div><div class=\"ln p\">별표 4. 2026년 사회복지이용시설 종사자 기본급 권고 기준(관리직)<\/div><div class=\"ln p\">(단위: 원/월)<\/div><table class=\"htbl\"><tr><td>직위<br>(호봉)<\/td><td>1급<\/td><td>2급<\/td><td>3급<\/td><td>4급<\/td><\/tr><tr><td>1호봉<\/td><td>2,312,700<\/td><td>2,266,900<\/td><td>2,225,400<\/td><td>2,197,000<\/td><\/tr><tr><td>2호봉<\/td><td>2,355,600<\/td><td>2,310,800<\/td><td>2,264,500<\/td><td>2,222,100<\/td><\/tr><tr><td>3호봉<\/td><td>2,404,100<\/td><td>2,353,700<\/td><td>2,308,600<\/td><td>2,261,100<\/td><\/tr><tr><td>4호봉<\/td><td>2,444,300<\/td><td>2,402,200<\/td><td>2,351,200<\/td><td>2,302,700<\/td><\/tr><tr><td>5호봉<\/td><td>2,529,200<\/td><td>2,442,600<\/td><td>2,399,600<\/td><td>2,343,500<\/td><\/tr><tr><td>6호봉<\/td><td>2,619,800<\/td><td>2,527,100<\/td><td>2,440,300<\/td><td>2,396,200<\/td><\/tr><tr><td>7호봉<\/td><td>2,693,000<\/td><td>2,617,700<\/td><td>2,524,700<\/td><td>2,435,800<\/td><\/tr><tr><td>8호봉<\/td><td>2,793,000<\/td><td>2,691,600<\/td><td>2,615,600<\/td><td>2,500,200<\/td><\/tr><tr><td>9호봉<\/td><td>2,892,400<\/td><td>2,785,400<\/td><td>2,689,400<\/td><td>2,579,300<\/td><\/tr><tr><td>10호봉<\/td><td>2,999,900<\/td><td>2,853,400<\/td><td>2,783,500<\/td><td>2,667,700<\/td><\/tr><tr><td>11호봉<\/td><td>3,091,900<\/td><td>2,930,900<\/td><td>2,851,500<\/td><td>2,736,000<\/td><\/tr><tr><td>12호봉<\/td><td>3,176,900<\/td><td>3,002,000<\/td><td>2,928,400<\/td><td>2,802,700<\/td><\/tr><\/table><table class=\"htbl\"><tr><td>직위<br>(호봉)<\/td><td>1급<\/td><td>2급<\/td><td>3급<\/td><td>4급<\/td><\/tr><tr><td>13호봉<\/td><td>3,252,500<\/td><td>3,060,900<\/td><td>2,996,600<\/td><td>2,872,800<\/td><\/tr><tr><td>14호봉<\/td><td>3,315,900<\/td><td>3,123,800<\/td><td>3,035,600<\/td><td>2,925,900<\/td><\/tr><tr><td>15호봉<\/td><td>3,382,500<\/td><td>3,181,100<\/td><td>3,070,000<\/td><td>2,972,100<\/td><\/tr><tr><td>16호봉<\/td><td>3,444,600<\/td><td>3,239,500<\/td><td>3,129,800<\/td><td>3,018,100<\/td><\/tr><tr><td>17호봉<\/td><td>3,497,900<\/td><td>3,292,200<\/td><td>3,188,400<\/td><td>3,076,100<\/td><\/tr><tr><td>18호봉<\/td><td>3,553,300<\/td><td>3,347,800<\/td><td>3,246,900<\/td><td>3,132,500<\/td><\/tr><tr><td>19호봉<\/td><td>3,609,100<\/td><td>3,406,800<\/td><td>3,296,500<\/td><td>3,192,200<\/td><\/tr><tr><td>20호봉<\/td><td>3,674,000<\/td><td>3,458,600<\/td><td>3,344,300<\/td><td>3,242,500<\/td><\/tr><tr><td>21호봉<\/td><td>3,731,900<\/td><td>3,512,500<\/td><td>3,401,500<\/td><td>3,299,100<\/td><\/tr><tr><td>22호봉<\/td><td>3,794,500<\/td><td>3,577,300<\/td><td>3,466,200<\/td><td>3,364,200<\/td><\/tr><tr><td>23호봉<\/td><td>3,851,700<\/td><td>3,633,300<\/td><td>3,533,200<\/td><td>3,428,600<\/td><\/tr><tr><td>24호봉<\/td><td>3,910,400<\/td><td>3,677,400<\/td><td>3,595,400<\/td><td>3,492,000<\/td><\/tr><\/table><table class=\"htbl\"><tr><td>직위<br>(호봉)<\/td><td>1급<\/td><td>2급<\/td><td>3급<\/td><td>4급<\/td><\/tr><tr><td>25호봉<\/td><td>3,971,000<\/td><td>3,722,600<\/td><td>3,652,800<\/td><td>3,555,900<\/td><\/tr><tr><td>26호봉<\/td><td>4,036,200<\/td><td>3,766,400<\/td><td>3,703,100<\/td><td>3,615,100<\/td><\/tr><tr><td>27호봉<\/td><td>4,101,000<\/td><td>3,827,400<\/td><td>3,752,400<\/td><td>3,664,400<\/td><\/tr><tr><td>28호봉<\/td><td>4,163,900<\/td><td>3,881,500<\/td><td>3,786,500<\/td><td>3,701,100<\/td><\/tr><tr><td>29호봉<\/td><td>4,215,400<\/td><td>3,907,700<\/td><td>3,824,700<\/td><td>3,739,500<\/td><\/tr><tr><td>30호봉<\/td><td>4,277,300<\/td><td>3,944,400<\/td><td>3,848,100<\/td><td>3,773,500<\/td><\/tr><tr><td>31호봉<\/td><td>4,321,900<\/td><td>3,985,500<\/td><td>3,887,700<\/td><td>3,799,800<\/td><\/tr><\/table><div class=\"ln note\">※ 관리직 : 노무, 운전기사, 조리사(원), 취사원, 고용직(청소, 취사 및 세탁 등 해당 업무가 가능한 자). 장애인복지관의 기능직, 고용직은 관리직을 준용하여 적용<\/div>", "pages": [{"p": 10, "t": "별표 4. 2026년 사회복지이용시설 종사자 기본급 권고 기준(관리직)\n(단위: 원/월)\n직위 (호봉) | 1급 | 2급 | 3급 | 4급\n1호봉 | 2,312,700 | 2,266,900 | 2,225,400 | 2,197,000\n2호봉 | 2,355,600 | 2,310,800 | 2,264,500 | 2,222,100\n3호봉 | 2,404,100 | 2,353,700 | 2,308,600 | 2,261,100\n4호봉 | 2,444,300 | 2,402,200 | 2,351,200 | 2,302,700\n5호봉 | 2,529,200 | 2,442,600 | 2,399,600 | 2,343,500\n6호봉 | 2,619,800 | 2,527,100 | 2,440,300 | 2,396,200\n7호봉 | 2,693,000 | 2,617,700 | 2,524,700 | 2,435,800\n8호봉 | 2,793,000 | 2,691,600 | 2,615,600 | 2,500,200\n9호봉 | 2,892,400 | 2,785,400 | 2,689,400 | 2,579,300\n10호봉 | 2,999,900 | 2,853,400 | 2,783,500 | 2,667,700\n11호봉 | 3,091,900 | 2,930,900 | 2,851,500 | 2,736,000\n12호봉 | 3,176,900 | 3,002,000 | 2,928,400 | 2,802,700\n직위 (호봉) | 1급 | 2급 | 3급 | 4급\n13호봉 | 3,252,500 | 3,060,900 | 2,996,600 | 2,872,800\n14호봉 | 3,315,900 | 3,123,800 | 3,035,600 | 2,925,900\n15호봉 | 3,382,500 | 3,181,100 | 3,070,000 | 2,972,100\n16호봉 | 3,444,600 | 3,239,500 | 3,129,800 | 3,018,100\n17호봉 | 3,497,900 | 3,292,200 | 3,188,400 | 3,076,100\n18호봉 | 3,553,300 | 3,347,800 | 3,246,900 | 3,132,500\n19호봉 | 3,609,100 | 3,406,800 | 3,296,500 | 3,192,200\n20호봉 | 3,674,000 | 3,458,600 | 3,344,300 | 3,242,500\n21호봉 | 3,731,900 | 3,512,500 | 3,401,500 | 3,299,100\n22호봉 | 3,794,500 | 3,577,300 | 3,466,200 | 3,364,200\n23호봉 | 3,851,700 | 3,633,300 | 3,533,200 | 3,428,600\n24호봉 | 3,910,400 | 3,677,400 | 3,595,400 | 3,492,000\n직위 (호봉) | 1급 | 2급 | 3급 | 4급\n25호봉 | 3,971,000 | 3,722,600 | 3,652,800 | 3,555,900\n26호봉 | 4,036,200 | 3,766,400 | 3,703,100 | 3,615,100\n27호봉 | 4,101,000 | 3,827,400 | 3,752,400 | 3,664,400\n28호봉 | 4,163,900 | 3,881,500 | 3,786,500 | 3,701,100\n29호봉 | 4,215,400 | 3,907,700 | 3,824,700 | 3,739,500\n30호봉 | 4,277,300 | 3,944,400 | 3,848,100 | 3,773,500\n31호봉 | 4,321,900 | 3,985,500 | 3,887,700 | 3,799,800\n※ 관리직 : 노무, 운전기사, 조리사(원), 취사원, 고용직(청소, 취사 및 세탁 등 해당 업무가 가능한 자). 장애인복지관의 기능직, 고용직은 관리직을 준용하여 적용"}]}, {"title": "별표 5~7. 기타직종 기준·승진 최소 소요 연한", "start": 11, "end": 11, "html": "<div class=\"pchip\" id=\"p11\"><span>원문 11쪽<\/span> <a class=\"pdflink\" href=\"pay2026.pdf#page=11\" target=\"_blank\" rel=\"noopener\" title=\"원문 PDF 해당 쪽을 새 탭에서 엽니다(PC에서 정확 이동).\">원문 PDF ↗<\/a><\/div><div class=\"ln p\">별표 5. 사회복지이용시설(사회, 노인, 장애인) 종사자 기본급 지급 기준 (기타직종)<\/div><table class=\"htbl\"><tr><td>해당직종<\/td><td>봉급적용<\/td><td>비고<\/td><\/tr><tr><td>조리사, 취사원<\/td><td>별표4를 적용하는 것보다 더 나은 기준을 운용하는 경우 기관별 근무조건 및 근무 형태에 따라 자율 적용<\/td><td rowspan=\"2\">전년도 대비 타 직종과의 형평성 고려하여 임금 인상<\/td><\/tr><tr><td>기능교사, 사서 등<\/td><td>기관별 근무조건 및 근무 형태에 따라 자율 적용<\/td><\/tr><tr><td>보육교사<\/td><td colspan=\"2\">별도의 예산지원 사업에 투입된 보육교사(예, 방과후 학교 등)의 경우는 해당 사업예산 지원단가에 준하여 지급하며, 그 외의 경우는 국․공립 어린이집 보육교사 급여 기준에 따라 지급.<\/td><\/tr><\/table><div class=\"ln p\">별표 6. 사회복지이용시설(사회복지직)의 직위별 승진 최소 소요 연한<\/div><table class=\"htbl\"><tr><td>직위<\/td><td>선임사회복지사<\/td><td>과장<\/td><td>부장·사무국장<\/td><\/tr><tr><td>연한<\/td><td>사회복지사로<br>만3년(4년차)이상<\/td><td>선임사회복지사로 만5년(6년차)이상<\/td><td>과장으로<br>만7년(8년차)이상<\/td><\/tr><\/table><div class=\"ln h4\">1) 승진에 필요한 “최소 소요연한”은 해당 직위에서의 실 근무경력을 말하며, 동일 유형의 시설 또는 동일 법인 내 시설 근무경력을 적용<\/div><div class=\"ln h4\">2) 2013년 12월 31일 이전 기준(해당 직종에서의 실 근무경력)에 의해 승진한 경우 종전 자격 유지<\/div><div class=\"ln h4\">3) 사회복지사로 만3년(4년차)의 “최소 소요연한”을 충족하는 경우, 당연 승진을 적용하여 선임사회복지사로 보하도록 노력하여야 함.<\/div><div class=\"ln h4\">4) 장애인 복지관 일반직의 승진 최소 소요 연한은 개별 지침 등 별도 기준을 적용<\/div><div class=\"ln h4\">5) 생활시설 선임생활지도원은 만3년(4년차) 이상인 생활지도원 중에서 법인 및 시설의 제반여건 등을 감안하여 선정<\/div><div class=\"ln p\">별표 7. 사회복지이용시설(사회복지외 직종)의 직급별 승진 최소 소요 연한<\/div><table class=\"htbl\"><tr><td>직급<\/td><td>3급<\/td><td>2급<\/td><td>1급<\/td><\/tr><tr><td>연한<\/td><td>4급으로 만3년(4년차)이상<\/td><td>3급으로 만5년(6년차)이상<\/td><td>2급으로 만7년(8년차)이상<\/td><\/tr><\/table><div class=\"ln h4\">1) 승진에 필요한 “최소 소요연한”은 해당 직위에서의 실 근무경력을 말하며, 동일 유형의 시설 또는 동일 법인 내 시설 근무경력을 적용 동일 법인 내 시설 근무경력을 적용<\/div><div class=\"ln h4\">2) 2013년 12월 31일 이전 기준(해당 직종에서의 실 근무경력)에 의해 승진한 경우 종전 자격 유지<\/div><div class=\"ln h4\">3) 4급으로 만3년(4년차)의 “최소 소요연한”을 충족하는 경우, 당연 승진을 적용하여 3급으로 보하도록 노력하여야 함.<\/div><div class=\"ln h4\">4) 본 &lt;별표7&gt;의 직급별 승진 최소 소요연한은 관리직, 사무직, 의료직, 타 직종 등에 각각 적용하며 개별 지침상 별도 기준이 있는 경우 이를 적용<\/div>", "pages": [{"p": 11, "t": "별표 5. 사회복지이용시설(사회, 노인, 장애인) 종사자 기본급 지급 기준 (기타직종)\n해당직종 | 봉급적용 | 비고\n조리사, 취사원 | 별표4를 적용하는 것보다 더 나은 기준을 운용하는 경우 기관별 근무조건 및 근무 형태에 따라 자율 적용 | 전년도 대비 타 직종과의 형평성 고려하여 임금 인상\n기능교사, 사서 등 | 기관별 근무조건 및 근무 형태에 따라 자율 적용\n보육교사 | 별도의 예산지원 사업에 투입된 보육교사(예, 방과후 학교 등)의 경우는 해당 사업예산 지원단가에 준하여 지급하며, 그 외의 경우는 국․공립 어린이집 보육교사 급여 기준에 따라 지급.\n별표 6. 사회복지이용시설(사회복지직)의 직위별 승진 최소 소요 연한\n직위 | 선임사회복지사 | 과장 | 부장·사무국장\n연한 | 사회복지사로 만3년(4년차)이상 | 선임사회복지사로 만5년(6년차)이상 | 과장으로 만7년(8년차)이상\n1) 승진에 필요한 “최소 소요연한”은 해당 직위에서의 실 근무경력을 말하며, 동일 유형의 시설 또는 동일 법인 내 시설 근무경력을 적용\n2) 2013년 12월 31일 이전 기준(해당 직종에서의 실 근무경력)에 의해 승진한 경우 종전 자격 유지\n3) 사회복지사로 만3년(4년차)의 “최소 소요연한”을 충족하는 경우, 당연 승진을 적용하여 선임사회복지사로 보하도록 노력하여야 함.\n4) 장애인 복지관 일반직의 승진 최소 소요 연한은 개별 지침 등 별도 기준을 적용\n5) 생활시설 선임생활지도원은 만3년(4년차) 이상인 생활지도원 중에서 법인 및 시설의 제반여건 등을 감안하여 선정\n별표 7. 사회복지이용시설(사회복지외 직종)의 직급별 승진 최소 소요 연한\n직급 | 3급 | 2급 | 1급\n연한 | 4급으로 만3년(4년차)이상 | 3급으로 만5년(6년차)이상 | 2급으로 만7년(8년차)이상\n1) 승진에 필요한 “최소 소요연한”은 해당 직위에서의 실 근무경력을 말하며, 동일 유형의 시설 또는 동일 법인 내 시설 근무경력을 적용 동일 법인 내 시설 근무경력을 적용\n2) 2013년 12월 31일 이전 기준(해당 직종에서의 실 근무경력)에 의해 승진한 경우 종전 자격 유지\n3) 4급으로 만3년(4년차)의 “최소 소요연한”을 충족하는 경우, 당연 승진을 적용하여 3급으로 보하도록 노력하여야 함.\n4) 본 <별표7>의 직급별 승진 최소 소요연한은 관리직, 사무직, 의료직, 타 직종 등에 각각 적용하며 개별 지침상 별도 기준이 있는 경우 이를 적용"}]}, {"title": "별표 8. 수당 기준(명절휴가비·가족수당 등)", "start": 12, "end": 12, "html": "<div class=\"pchip\" id=\"p12\"><span>원문 12쪽<\/span> <a class=\"pdflink\" href=\"pay2026.pdf#page=12\" target=\"_blank\" rel=\"noopener\" title=\"원문 PDF 해당 쪽을 새 탭에서 엽니다(PC에서 정확 이동).\">원문 PDF ↗<\/a><\/div><div class=\"ln p\">별표 8. 사회복지시설 종사자 수당 기준<\/div><table class=\"htbl\"><tr><td>수당의 종류<\/td><td>지급대상<\/td><td>지급액<\/td><td>지급회수 및 지급일<\/td><\/tr><tr><td>명절휴가비<\/td><td>재직 중인 종사자<br>(육아휴직,병가휴직 등 장기휴직 제외)<\/td><td>기본급의 120%<\/td><td>기본급의 60%씩 연 2회, 설과 추석이 속한 달의 보수지급일(또는 설과 추석 전 15일 이내에 시설의 장이 정한 날)<\/td><\/tr><tr><td>가족수당<\/td><td>부양가족이 있는 종사자<\/td><td>- 배우자 : 월 40,000원<br>- 배우자 및 자녀를 제외한 부양가족(직계존속·비속 등) : 1명당 월 20,000원<br>- 자녀 : 첫째 월 50,000원, 둘째 월 80,000원, 셋째 이후 자녀 월 120,000원<\/td><td>매월 급여 지급일에 지급<br>(이외 세부기준은 공무원 보수 등의 업무지침 준용)<\/td><\/tr><tr><td>시간외<br>근무수당<\/td><td>규정된 근무시간 외 연장·야간·휴일 근로를 한 종사자<\/td><td>(연장근로) 통상임금의 50% 이상 가산<br>(야간근로) 통상임금의 50%이상 가산<br>(8시간 이내 휴일근로) 통상임금의 50% 이상 가산<br>(8시간 초과 휴일근로) 통상임금의 100% 이상 가산<br>* 연장·휴일 및 야간근로 시간당 월 통상임금의 1/209 기준으로 산정<\/td><td>시간외근무를 한 다음달 보수 지급일<br>(단, 12월은 당월에 지급)<\/td><\/tr><\/table><div class=\"ln note\">※ 2009년부터 공무원의 ‘정근수당’, ‘정액급식비’, ‘직급보조비’를 포함하여 사회복지시설 종사자의 호봉별 기본급표 작성<\/div><div class=\"ln note\">※ 위 권고 수당 중 명절휴가비가 통상임금에 포함됨. 이외 별도 지급 수당이 있는 경우 수당의 성격에 따라 통상임금 산정범위 별도 판단 필요<\/div>", "pages": [{"p": 12, "t": "별표 8. 사회복지시설 종사자 수당 기준\n수당의 종류 | 지급대상 | 지급액 | 지급회수 및 지급일\n명절휴가비 | 재직 중인 종사자 (육아휴직,병가휴직 등 장기휴직 제외) | 기본급의 120% | 기본급의 60%씩 연 2회, 설과 추석이 속한 달의 보수지급일(또는 설과 추석 전 15일 이내에 시설의 장이 정한 날)\n가족수당 | 부양가족이 있는 종사자 | - 배우자 : 월 40,000원 - 배우자 및 자녀를 제외한 부양가족(직계존속·비속 등) : 1명당 월 20,000원 - 자녀 : 첫째 월 50,000원, 둘째 월 80,000원, 셋째 이후 자녀 월 120,000원 | 매월 급여 지급일에 지급 (이외 세부기준은 공무원 보수 등의 업무지침 준용)\n시간외 근무수당 | 규정된 근무시간 외 연장·야간·휴일 근로를 한 종사자 | (연장근로) 통상임금의 50% 이상 가산 (야간근로) 통상임금의 50%이상 가산 (8시간 이내 휴일근로) 통상임금의 50% 이상 가산 (8시간 초과 휴일근로) 통상임금의 100% 이상 가산 * 연장·휴일 및 야간근로 시간당 월 통상임금의 1/209 기준으로 산정 | 시간외근무를 한 다음달 보수 지급일 (단, 12월은 당월에 지급)\n※ 2009년부터 공무원의 ‘정근수당’, ‘정액급식비’, ‘직급보조비’를 포함하여 사회복지시설 종사자의 호봉별 기본급표 작성\n※ 위 권고 수당 중 명절휴가비가 통상임금에 포함됨. 이외 별도 지급 수당이 있는 경우 수당의 성격에 따라 통상임금 산정범위 별도 판단 필요"}]}, {"title": "별표 9. 적용가능 사회복지시설의 종류", "start": 13, "end": 13, "html": "<div class=\"pchip\" id=\"p13\"><span>원문 13쪽<\/span> <a class=\"pdflink\" href=\"pay2026.pdf#page=13\" target=\"_blank\" rel=\"noopener\" title=\"원문 PDF 해당 쪽을 새 탭에서 엽니다(PC에서 정확 이동).\">원문 PDF ↗<\/a><\/div><div class=\"ln p\">별표 9. 적용가능 사회복지시설의 종류<\/div><table class=\"htbl\"><tr><td rowspan=\"2\">소관<br>부처<\/td><td rowspan=\"2\">시설종류<\/td><td colspan=\"2\">세부종류<\/td><td rowspan=\"2\">관련법<\/td><\/tr><tr><td>생활시설<\/td><td>이용시설<\/td><\/tr><tr><td rowspan=\"8\">보건<br>복지부<\/td><td>노인복지시설<\/td><td>◦노인주거복지시설<br>◦노인의료복지시설<br>◦학대피해노인전용쉼터<\/td><td>◦재가노인복지시설<br>◦노인여가복지시설<br>◦노인보호전문기관<br>◦노인일자리지원기관<\/td><td>｢노인복지법｣<\/td><\/tr><tr><td>복합노인복지시설<\/td><td colspan=\"2\">◦ 농어촌에 지역에 한해 ｢노인복지법｣ 제31조 노인 복지시설을 종합적으로 배치한 복합노인복지시설을 설치･운영 가능<\/td><td>｢농어촌주민의 보건복지<br>증진을 위한 특별법｣<\/td><\/tr><tr><td>아동복지시설<\/td><td>◦아동양육시설<br>◦아동일시보호시설<br>◦아동보호치료시설<br>◦자립지원시설<br>◦공동생활가정<br>◦학대피해아동쉼터<\/td><td>◦아동상담소<br>◦아동전용시설<br>◦지역아동센터<br>◦다함께돌봄센터<br>◦아동보호전문기관<br>◦가정위탁지원센터<br>◦자립지원전담기관<\/td><td>｢아동복지법｣<\/td><\/tr><tr><td>장애인복지시설<\/td><td>◦장애인거주시설<br>- 장애유형별 거주시설<br>- 중증장애인 거주시설<br>- 장애영유아 거주시설<br>- 장애인단기 거주시설<br>- 장애인공동생활가정<br>◦학대피해장애인쉼터<br>- 피해장애인쉼터<br>- 피해장애아동쉼터<\/td><td>◦장애인지역사회재활시설<br>◦장애인직업재활시설<br>◦장애인의료재활시설<br>◦장애인생산품판매시설<br>◦지역보조기기센터<\/td><td>｢장애인복지법｣,<br>｢장애인‧노인 등을 위한 보조기기 지원 및 활용촉진에 관한 법률｣<\/td><\/tr><tr><td>정신건강증진시설<\/td><td>◦정신요양시설<br>◦정신재활시설 중 생활시설<\/td><td>◦정신재활시설 중 이용시설<\/td><td>｢정신건강증진 및 정신질환자 복지서비스 지원에 관한 법률｣<\/td><\/tr><tr><td>노숙인시설<\/td><td>◦노숙인자활시설<br>◦노숙인재활시설<br>◦노숙인요양시설<\/td><td>◦노숙인종합지원센터<br>◦노숙인일시보호시설<br>◦노숙인급식시설<br>◦노숙인진료시설<br>◦쪽방상담소<\/td><td>｢노숙인 등의 복지 및 자립지원에 관한 법률｣<\/td><\/tr><tr><td>사회복지관<\/td><td><\/td><td>◦사회복지관<\/td><td>｢사회복지사업법｣<\/td><\/tr><tr><td>지역자활센터<\/td><td><\/td><td>◦지역자활센터<\/td><td>｢국민기초생활보장법｣<\/td><\/tr><tr><td>질병관리청<\/td><td>결핵･한센시설<\/td><td>◦결핵･한센시설<\/td><td><\/td><td>｢사회복지사업법｣<\/td><\/tr><tr><td rowspan=\"7\">성평등 가족부<\/td><td>성매매피해지원시설<\/td><td>◦일반지원시설<br>◦청소년지원시설<br>◦외국인지원시설<br>◦자립지원공동생활시설<\/td><td>◦자활지원센터<br>◦성매매피해상담소<\/td><td>｢성매매방지 및 피해자 보호 등에 관한 법률｣<\/td><\/tr><tr><td>성폭력피해보호시설<\/td><td>◦성폭력피해자보호시설<\/td><td>◦성폭력피해상담소<br>◦디지털성범죄피해자지원센터<\/td><td>｢성폭력방지 및 피해자 보호 등에 관한 법률｣<\/td><\/tr><\/table><table class=\"htbl\"><tr><td rowspan=\"2\">소관<br>부처<\/td><td rowspan=\"2\">시설종류<\/td><td colspan=\"2\">세부종류<\/td><td rowspan=\"2\">관련법<\/td><\/tr><tr><td>가정폭력보호시설<\/td><td>◦가정폭력피해자보호시설<\/td><td>◦가정폭력상담소<br>◦긴급전화센터<\/td><td>｢가정폭력방지 및<br>피해자 보호 등에 관한 법률｣<\/td><\/tr><tr><td>한부모가족복지시설<\/td><td>◦출산지원시설<br>◦양육지원시설<br>◦생활지원시설<br>◦일시지원복지시설<\/td><td>◦한부모가족복지상담소<\/td><td>｢한부모가족지원법｣<\/td><\/tr><tr><td>다문화가족지원센터<\/td><td><\/td><td>◦다문화가족지원센터<\/td><td>｢다문화가족지원법｣<\/td><\/tr><tr><td>건강가정지원센터<\/td><td><\/td><td>◦건강가정지원센터<\/td><td>｢건강가정기본법｣<\/td><\/tr><tr><td>청소년복지시설<\/td><td>◦청소년쉼터<br>◦청소년자립지원관<br>◦청소년치료재활센터<br>◦청소년회복지원시설<\/td><td><\/td><td>｢청소년복지 지원법｣<\/td><\/tr><tr><td>통일부<\/td><td>북한이탈주민지원시설<\/td><td><\/td><td>◦북한이탈주민지역적응센터<\/td><td>｢북한이탈주민의 보호 및 정착지원에 관한 법률｣<\/td><\/tr><\/table>", "pages": [{"p": 13, "t": "별표 9. 적용가능 사회복지시설의 종류\n소관 부처 | 시설종류 | 세부종류 | 관련법\n생활시설 | 이용시설\n보건 복지부 | 노인복지시설 | ◦노인주거복지시설 ◦노인의료복지시설 ◦학대피해노인전용쉼터 | ◦재가노인복지시설 ◦노인여가복지시설 ◦노인보호전문기관 ◦노인일자리지원기관 | ｢노인복지법｣\n복합노인복지시설 | ◦ 농어촌에 지역에 한해 ｢노인복지법｣ 제31조 노인 복지시설을 종합적으로 배치한 복합노인복지시설을 설치･운영 가능 | ｢농어촌주민의 보건복지 증진을 위한 특별법｣\n아동복지시설 | ◦아동양육시설 ◦아동일시보호시설 ◦아동보호치료시설 ◦자립지원시설 ◦공동생활가정 ◦학대피해아동쉼터 | ◦아동상담소 ◦아동전용시설 ◦지역아동센터 ◦다함께돌봄센터 ◦아동보호전문기관 ◦가정위탁지원센터 ◦자립지원전담기관 | ｢아동복지법｣\n장애인복지시설 | ◦장애인거주시설 - 장애유형별 거주시설 - 중증장애인 거주시설 - 장애영유아 거주시설 - 장애인단기 거주시설 - 장애인공동생활가정 ◦학대피해장애인쉼터 - 피해장애인쉼터 - 피해장애아동쉼터 | ◦장애인지역사회재활시설 ◦장애인직업재활시설 ◦장애인의료재활시설 ◦장애인생산품판매시설 ◦지역보조기기센터 | ｢장애인복지법｣, ｢장애인‧노인 등을 위한 보조기기 지원 및 활용촉진에 관한 법률｣\n정신건강증진시설 | ◦정신요양시설 ◦정신재활시설 중 생활시설 | ◦정신재활시설 중 이용시설 | ｢정신건강증진 및 정신질환자 복지서비스 지원에 관한 법률｣\n노숙인시설 | ◦노숙인자활시설 ◦노숙인재활시설 ◦노숙인요양시설 | ◦노숙인종합지원센터 ◦노숙인일시보호시설 ◦노숙인급식시설 ◦노숙인진료시설 ◦쪽방상담소 | ｢노숙인 등의 복지 및 자립지원에 관한 법률｣\n사회복지관 |  | ◦사회복지관 | ｢사회복지사업법｣\n지역자활센터 |  | ◦지역자활센터 | ｢국민기초생활보장법｣\n질병관리청 | 결핵･한센시설 | ◦결핵･한센시설 |  | ｢사회복지사업법｣\n성평등 가족부 | 성매매피해지원시설 | ◦일반지원시설 ◦청소년지원시설 ◦외국인지원시설 ◦자립지원공동생활시설 | ◦자활지원센터 ◦성매매피해상담소 | ｢성매매방지 및 피해자 보호 등에 관한 법률｣\n성폭력피해보호시설 | ◦성폭력피해자보호시설 | ◦성폭력피해상담소 ◦디지털성범죄피해자지원센터 | ｢성폭력방지 및 피해자 보호 등에 관한 법률｣\n소관 부처 | 시설종류 | 세부종류 | 관련법\n가정폭력보호시설 | ◦가정폭력피해자보호시설 | ◦가정폭력상담소 ◦긴급전화센터 | ｢가정폭력방지 및 피해자 보호 등에 관한 법률｣\n한부모가족복지시설 | ◦출산지원시설 ◦양육지원시설 ◦생활지원시설 ◦일시지원복지시설 | ◦한부모가족복지상담소 | ｢한부모가족지원법｣\n다문화가족지원센터 |  | ◦다문화가족지원센터 | ｢다문화가족지원법｣\n건강가정지원센터 |  | ◦건강가정지원센터 | ｢건강가정기본법｣\n청소년복지시설 | ◦청소년쉼터 ◦청소년자립지원관 ◦청소년치료재활센터 ◦청소년회복지원시설 |  | ｢청소년복지 지원법｣\n통일부 | 북한이탈주민지원시설 |  | ◦북한이탈주민지역적응센터 | ｢북한이탈주민의 보호 및 정착지원에 관한 법률｣"}]}]}]}</script>
+<script>
+const CFG  = JSON.parse(document.getElementById('guide-cfg').textContent);
+const DATA = JSON.parse(document.getElementById('guide-data').textContent);
+const CHANGES    = CFG.changes    || [];
+const HIGHLIGHTS = CFG.highlights || [];
+const UNIT = CFG.unitLabel || '장';   // 대분류 호칭(장/부/편)
+
+/* ── state ── */
+let S = {view:'home', ch:DATA.chapters[0].no, sec:0, sub:-1, terms:[], fs:1, hc:false};
+const LSKEY='dash-pref-'+(CFG.slug||'doc');
+try{ const sv=localStorage.getItem(LSKEY); if(sv){const o=JSON.parse(sv); S.fs=o.fs??1; S.hc=!!o.hc;} }catch(e){}
+
+const FS=[[15,12],[17,13.5],[19,15.5],[22,18]];
+function applyPref(){
+  const f=FS[S.fs]||FS[1];
+  document.documentElement.style.setProperty('--fs',f[0]+'px');
+  document.documentElement.style.setProperty('--fs-pre',f[1]+'px');
+  document.body.classList.toggle('hc',S.hc);
+  document.getElementById('hcBtn').setAttribute('aria-pressed',String(S.hc));
+  try{localStorage.setItem(LSKEY,JSON.stringify({fs:S.fs,hc:S.hc}));}catch(e){}
+}
+document.getElementById('fPlus').onclick=()=>{S.fs=Math.min(3,S.fs+1);applyPref();};
+document.getElementById('fMinus').onclick=()=>{S.fs=Math.max(0,S.fs-1);applyPref();};
+document.getElementById('hcBtn').onclick=()=>{S.hc=!S.hc;applyPref();};
+
+/* ── helpers ── */
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const rxesc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+function hilite(t,terms){
+  let h=esc(t);
+  if(terms.length){
+    const rx=new RegExp('('+terms.map(rxesc).join('|')+')','gi');
+    h=h.replace(rx,'<mark>$1</mark>');
+  }
+  return h;
+}
+function chapter(no){return DATA.chapters.find(c=>c.no===no);}
+function pagesOf(sec,subIdx){
+  if(sec.subs&&sec.subs.length){
+    if(subIdx>=0) return sec.subs[subIdx].pages;
+    return sec.subs.flatMap(s=>s.pages);
+  }
+  return sec.pages||[];
+}
+function findLoc(p){
+  for(const c of DATA.chapters) for(let i=0;i<c.sections.length;i++){
+    const s=c.sections[i];
+    if(p>=s.start&&p<=s.end){
+      if(s.subs&&s.subs.length){
+        for(let j=0;j<s.subs.length;j++) if(p>=s.subs[j].start&&p<=s.subs[j].end) return {ch:c.no,sec:i,sub:j};
+      }
+      return {ch:c.no,sec:i,sub:-1};
+    }
+  }
+  return null;
+}
+
+/* ── search index ── */
+const INDEX=[];
+for(const c of DATA.chapters) for(let i=0;i<c.sections.length;i++){
+  const s=c.sections[i];
+  const push=(pg,subIdx,subT)=>INDEX.push({ch:c.no,chT:c.title,sec:i,secT:s.title,sub:subIdx,subT,p:pg.p,t:pg.t,low:pg.t.toLowerCase()});
+  if(s.subs&&s.subs.length) s.subs.forEach((sb,j)=>sb.pages.forEach(pg=>push(pg,j,sb.title)));
+  else (s.pages||[]).forEach(pg=>push(pg,-1,null));
+}
+
+/* ── tabs ── */
+const TABS=[['home','홈']];
+if(CHANGES.length) TABS.push(['changes',CFG.changesTab||'개정사항']);
+TABS.push(['browse',CFG.browseTab||'목차별 열람']);
+(CFG.quickTabs||[]).forEach((qt,i)=>TABS.push(['quick'+i,qt.label]));
+
+function renderTabs(){
+  document.getElementById('tabs').innerHTML=TABS.map(([k,l])=>
+    `<button class="tab ${S.view===k||(S.view==='reader'&&k==='browse')||(S.view==='search'&&k==='home')?'on':''}" data-v="${k}">${l}</button>`).join('');
+  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+    const v=b.dataset.v;
+    if(v==='browse'){go({view:'reader',ch:S.view==='reader'?S.ch:DATA.chapters[0].no,sec:S.view==='reader'?S.sec:0,sub:-1});}
+    else if(v.startsWith('quick')){const qt=CFG.quickTabs[+v.slice(5)];go({view:'reader',ch:qt.ch,sec:qt.sec||0,sub:-1});}
+    else go({view:v});
+  });
+}
+
+function go(patch){
+  S={...S,...patch};
+  if(!('terms' in patch)) S.terms=[];
+  render();
+  window.scrollTo({top:0});
+}
+
+/* ── views ── */
+function vHome(){
+  const totSec=DATA.chapters.reduce((a,c)=>a+c.sections.length,0);
+  const tiles=[
+    `<div class="stat" role="listitem"><div class="n">${DATA.chapters.length}개 ${UNIT}</div><div class="l">${CFG.chapterTileLabel||'대분류'}</div></div>`,
+    `<div class="stat" role="listitem"><div class="n">${totSec}개 절</div><div class="l">${CFG.sectionTileLabel||'세부 항목'}</div></div>`,
+    `<div class="stat" role="listitem"><div class="n">${DATA.totalPages}쪽</div><div class="l">원문 전체 수록</div></div>`,
+  ];
+  if(CHANGES.length) tiles.push(`<div class="stat" role="listitem"><div class="n">${CHANGES.length}개</div><div class="l">${CFG.changesTileLabel||'개정 항목'}</div></div>`);
+  return `
+  <div class="stats" role="list">${tiles.join('')}</div>
+  ${HIGHLIGHTS.length?`
+  <div class="h2">${CFG.highlightsTitle||'주요 내용 하이라이트'} <span class="cnt">— 카드를 누르면 원문으로 이동</span></div>
+  <div class="hl-grid">
+    ${HIGHLIGHTS.map(h=>`<div class="hl" data-p="${h.p}" tabindex="0" role="button">
+      <div class="t">${h.t}</div><div class="d">${h.d}</div><div class="p">원문 ${h.p}쪽 →</div></div>`).join('')}
+  </div>`:''}
+  <div class="h2">${CFG.browseTitle||'목차별 열람'} <span class="cnt">— ${UNIT}을 누르면 절 단위 원문 열람</span></div>
+  <div class="ch-grid">
+    ${DATA.chapters.map(c=>`<div class="chcard" data-ch="${c.no}" tabindex="0" role="button">
+      <span class="no">제${c.no}${UNIT}</span>
+      <h3>${c.title}</h3>
+      <div class="pg">원문 ${c.start}~${c.end}쪽 · ${c.sections.length}개 절</div>
+      <ul>${c.sections.slice(0,4).map(s=>`<li>${s.title}</li>`).join('')}${c.sections.length>4?`<li>… 외 ${c.sections.length-4}개 절</li>`:''}</ul>
+    </div>`).join('')}
+  </div>`;
+}
+
+function vChanges(){
+  const src=CFG.changesSource||{};
+  const srcPages=src.ch?pagesOf(chapter(src.ch).sections[src.sec||0],-1):[];
+  return `
+  <div class="h2">${CFG.changesTitle||'개정사항 색인'} <span class="cnt">— ${CHANGES.length}개 항목</span></div>
+  ${CFG.changesNote?`<div class="notice">${CFG.changesNote}</div>`:''}
+  <div style="overflow-x:auto"><table class="chgtable">
+    <thead><tr><th>구분</th><th>항목</th><th>주요 내용</th><th style="white-space:nowrap">바로가기</th></tr></thead>
+    <tbody>${CHANGES.map(c=>`<tr>
+      <td class="code">${c.code||''}</td>
+      <td class="nm">${c.name}</td>
+      <td style="font-size:.92em">${c.note||''}</td>
+      <td style="white-space:nowrap">
+        ${c.p1?`<button class="gobtn" data-goto-p="${c.p1}">원문 ${c.p1}${c.p2>c.p1?'~'+c.p2:''}쪽</button><br>`:''}
+        ${c.ch?`<button class="gobtn" data-goto-sec="${c.ch}:${c.sec||0}">본문 제${c.ch}${UNIT}</button>`:''}
+      </td></tr>`).join('')}
+    </tbody></table></div>
+  ${(()=>{ if(!CFG.changesSource)return '';
+    const ss=chapter(CFG.changesSource.ch).sections[CFG.changesSource.sec||0];
+    if(ss&&ss.html) return `<div class="h2">${CFG.changesSourceTitle||'개정 대조표 원문 전체'}</div><div class="pageblock"><div class="pagebody">${ss.html}</div></div>`;
+    return srcPages.length?`<div class="h2">${CFG.changesSourceTitle||'개정 대조표 원문 전체'}</div>${readerPages(srcPages,[])}`:''; })()}`;
+}
+
+function sideTree(){
+  return `<div class="side" aria-label="목차">${DATA.chapters.map(c=>{
+    const open=c.no===S.ch;
+    return `<button class="chh" data-ch="${c.no}"><span>제${c.no}${UNIT} ${c.title}</span><span class="ar">${open?'▾':'▸'}</span></button>
+    ${open?`<div class="secs">${c.sections.map((s,i)=>{
+      const on=i===S.sec;
+      let html=`<button class="sec ${on&&S.sub<0?'on':''}" data-sec="${c.no}:${i}">${s.title} <span style="opacity:.65;font-size:.85em">p.${s.start}</span></button>`;
+      if(on&&s.subs&&s.subs.length){
+        html+=s.subs.map((sb,j)=>`<button class="sec sub ${S.sub===j?'on':''}" data-sub="${c.no}:${i}:${j}">${sb.title}</button>`).join('');
+      }
+      return html;
+    }).join('')}</div>`:''}`;
+  }).join('')}</div>`;
+}
+
+function pdfLink(p){
+  if(!CFG.pdfUrl) return '';
+  const n=p+(CFG.pdfOffset||0);
+  return ` <a class="pdflink" href="${CFG.pdfUrl}#page=${n}" target="_blank" rel="noopener" `+
+    `title="원문 PDF를 새 탭에서 엽니다. PC 브라우저에서는 해당 쪽으로 바로 이동합니다(휴대폰은 1쪽부터 열릴 수 있음).">원문 PDF ↗</a>`;
+}
+/* 공문서 위계(1. → 가. → ○ → － → ※) 인식 렌더링.
+   넓은 공백이 있는 줄(표)은 고정폭 pre로 묶어 열 정렬을 보존한다. */
+function renderBody(t,terms){
+  const lines=t.split('\n'), out=[]; let mono=[];
+  const ROMAN=/^[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ]\s*\.?\s+\S/;
+  /* 1차 분류: b=빈 줄, t=표(넓은 공백), o=일반 텍스트 */
+  const kind=lines.map(l=>{
+    const s=l.trim();
+    if(!s) return 'b';
+    if(ROMAN.test(s)&&s.length<70) return 'o';           // 절 대제목은 표로 취급 안 함
+    return /\S\s{5,}\S/.test(s)?'t':'o';
+  });
+  /* 표 사이에 낀 일반 줄은 표에 병합(행 대응 유지) */
+  const near=(i,dir)=>{let j=i+dir,st=0;while(j>=0&&j<lines.length&&st<2){if(kind[j]==='t')return true;if(kind[j]==='o')return false;j+=dir;st++;}return false;};
+  for(let i=0;i<lines.length;i++) if(kind[i]==='o'&&near(i,-1)&&near(i,1)) kind[i]='t';
+  const flushMono=()=>{ if(mono.length){out.push('<pre>'+mono.map(l=>hilite(l,terms)).join('\n')+'</pre>');mono=[];} };
+  const pushGap=()=>{ if(out.length&&!out[out.length-1].startsWith('<div class="gap"')) out.push('<div class="gap"></div>'); };
+  for(let i=0;i<lines.length;i++){
+    const l=lines[i], s=l.trim();
+    if(kind[i]==='b'){ flushMono(); pushGap(); continue; }
+    if(kind[i]==='t'){ mono.push(l); continue; }
+    flushMono();
+    const ind=Math.min(Math.floor((l.length-l.trimStart().length)/2),14);
+    // 배지 숫자 단독줄 + 다음 줄 제목 → 합쳐서 번호 제목으로
+    if(/^\d{1,2}$/.test(s)){
+      let j=i+1; while(j<lines.length&&!lines[j].trim())j++;
+      const nx=j<lines.length?lines[j].trim():'';
+      if(nx&&nx.length<60&&!/\S\s{5,}\S/.test(nx)&&!/^\d/.test(nx)){
+        out.push(`<div class="ln h2"><span class="badge">${s}</span>${hilite(nx,terms)}</div>`);
+        i=j; continue;
+      }
+    }
+    let cls='p', html=hilite(s,terms);
+    const mNum=s.match(/^(\d{1,2})\s+(\S.*)$/);
+    if(ROMAN.test(s)){ cls='h1'; html=hilite(s.replace(/\s+/g,' '),terms); }
+    else if(mNum&&s.length<55&&!/^\d+\s*[.,)]/.test(s)&&!/^\d+\s+\d/.test(s)){
+      cls='h2'; html=`<span class="badge">${mNum[1]}</span>${hilite(mNum[2],terms)}`;
+    }
+    else if(/^[가-힣]\.\s/.test(s)) cls='h3';
+    else if(/^\d{1,2}\)\s/.test(s)) cls='h4';
+    else if(/^○/.test(s)) cls='b1';
+    else if(/^[※＊]/.test(s)) cls='note';
+    out.push(`<div class="ln ${cls}" style="--ind:${cls==='p'?ind:0}">${html}</div>`);
+  }
+  flushMono();
+  return out.join('');
+}
+function readerPages(pages,terms){
+  return pages.map(pg=>`<div class="pageblock" id="p${pg.p}">
+    <div class="pagehead"><span>원문 ${pg.p}쪽${pdfLink(pg.p)}</span><span>${DATA.title}</span></div>
+    <div class="pagebody">${renderBody(pg.t,terms)}</div></div>`).join('');
+}
+
+/* 하이브리드 모드: 사전 조판된 HTML의 텍스트 노드에만 검색어 형광 적용 */
+function markTerms(html,terms){
+  if(!terms.length) return html;
+  const rx=new RegExp('('+terms.map(rxesc).join('|')+')','gi');
+  return html.replace(/>([^<]+)</g,(m,t)=>'>'+t.replace(rx,'<mark>$1</mark>')+'<');
+}
+function vReader(){
+  const c=chapter(S.ch), s=c.sections[S.sec];
+  if(S.sub>=0&&(!s.subs||S.sub>=s.subs.length)) S.sub=-1;  // 장 이동 시 이전 세부항목 인덱스 방어
+  const pages=pagesOf(s,S.sub);
+  const subT=(S.sub>=0&&s.subs)?s.subs[S.sub].title:null;
+  const flat=[]; DATA.chapters.forEach(cc=>cc.sections.forEach((ss,i)=>flat.push([cc.no,i,`제${cc.no}${UNIT} · ${ss.title}`])));
+  const cur=flat.findIndex(f=>f[0]===S.ch&&f[1]===S.sec);
+  const prev=flat[cur-1],next=flat[cur+1];
+  return `<div class="reader">
+    ${sideTree()}
+    <div class="content">
+      <div class="crumb">제${c.no}${UNIT} ${c.title} ${subT?'· '+s.title:''}</div>
+      <h2 class="title">${subT||s.title}</h2>
+      <div class="range">원문 ${s.html?s.start+'~'+s.end:(pages.length?pages[0].p+'~'+pages[pages.length-1].p:'-')}쪽 ${s.html?'':'· '+pages.length+'쪽 분량'} ${s.subs&&s.subs.length&&S.sub<0?'· 세부항목 '+s.subs.length+'개(왼쪽 목차에서 선택)':''}</div>
+      ${s.html?`<div class="pageblock"><div class="pagebody">${markTerms(s.html,S.terms)}</div></div>`:readerPages(pages,S.terms)}
+      <div class="secnav">
+        <button ${prev?'':'disabled style="visibility:hidden"'} data-nav="${prev?prev[0]+':'+prev[1]:''}">← ${prev?prev[2]:''}</button>
+        <button ${next?'':'disabled style="visibility:hidden"'} data-nav="${next?next[0]+':'+next[1]:''}">${next?next[2]:''} →</button>
+      </div>
+    </div></div>`;
+}
+
+function vSearch(){
+  const terms=S.terms;
+  if(!terms.length) return '<p>검색어를 입력하세요.</p>';
+  const hits=[];
+  for(const e of INDEX){
+    if(terms.every(t=>e.low.includes(t.toLowerCase()))) hits.push(e);
+    if(hits.length>=300) break;
+  }
+  const shown=hits.slice(0,200);
+  return `
+  <div class="h2">검색 결과</div>
+  <div class="rescount">"<b>${esc(terms.join(' '))}</b>" — ${hits.length>=300?'300건 이상':hits.length+'건'} (쪽 단위${hits.length>200?', 상위 200건 표시':''})</div>
+  ${shown.length? shown.map(e=>{
+    const pos=e.low.indexOf(terms[0].toLowerCase());
+    const a=Math.max(0,pos-70), b=Math.min(e.t.length,pos+130);
+    const snip=(a>0?'… ':'')+e.t.slice(a,b).replace(/\s+/g,' ')+(b<e.t.length?' …':'');
+    return `<div class="sr" data-jump="${e.p}" tabindex="0" role="button">
+      <div class="loc">제${e.ch}${UNIT} ${e.chT} › ${e.secT}${e.subT?' › '+e.subT:''} · 원문 ${e.p}쪽</div>
+      <div class="snip">${hilite(snip,terms)}</div></div>`;
+  }).join('') : '<p>일치하는 내용이 없습니다. 단어를 줄이거나 다른 표현으로 검색해 보세요.</p>'}`;
+}
+
+/* ── render & events ── */
+function render(){
+  renderTabs();
+  const m=document.getElementById('main');
+  if(S.view==='home')m.innerHTML=vHome();
+  else if(S.view==='changes')m.innerHTML=vChanges();
+  else if(S.view==='reader')m.innerHTML=vReader();
+  else if(S.view==='search')m.innerHTML=vSearch();
+  bind(m);
+}
+function jumpToPage(p,terms){
+  const loc=findLoc(p);
+  if(!loc)return;
+  S={...S,view:'reader',ch:loc.ch,sec:loc.sec,sub:loc.sub,terms:terms||[]};
+  render();
+  requestAnimationFrame(()=>{
+    const el=document.getElementById('p'+p);
+    if(el){el.scrollIntoView({block:'start'});window.scrollBy(0,-70);}
+  });
+}
+function bind(m){
+  m.querySelectorAll('[data-ch]').forEach(el=>{
+    el.onclick=()=>go({view:'reader',ch:+el.dataset.ch,sec:0,sub:-1});
+  });
+  m.querySelectorAll('.chcard').forEach(el=>{
+    el.onkeydown=e=>{if(e.key==='Enter')el.click();};
+  });
+  m.querySelectorAll('[data-sec]').forEach(el=>el.onclick=()=>{const[a,b]=el.dataset.sec.split(':');go({view:'reader',ch:+a,sec:+b,sub:-1});});
+  m.querySelectorAll('[data-sub]').forEach(el=>el.onclick=()=>{const[a,b,c]=el.dataset.sub.split(':');go({view:'reader',ch:+a,sec:+b,sub:+c});});
+  m.querySelectorAll('[data-nav]').forEach(el=>el.onclick=()=>{const[a,b]=el.dataset.nav.split(':');go({view:'reader',ch:+a,sec:+b,sub:-1});});
+  m.querySelectorAll('[data-p],[data-jump]').forEach(el=>{
+    const p=+(el.dataset.p||el.dataset.jump);
+    el.onclick=()=>jumpToPage(p, el.dataset.jump?S.terms:[]);
+    el.onkeydown=e=>{if(e.key==='Enter')el.click();};
+  });
+  m.querySelectorAll('[data-goto-p]').forEach(el=>el.onclick=()=>jumpToPage(+el.dataset.gotoP,[]));
+  m.querySelectorAll('[data-goto-sec]').forEach(el=>el.onclick=()=>{const[a,b]=el.dataset.gotoSec.split(':');go({view:'reader',ch:+a,sec:+b,sub:-1});});
+}
+function doSearch(){
+  const q=document.getElementById('q').value.trim();
+  if(!q)return;
+  S.terms=q.split(/\s+/).filter(Boolean).slice(0,5);
+  S.view='search';
+  render();window.scrollTo({top:0});
+}
+document.getElementById('qbtn').onclick=doSearch;
+document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
+
+applyPref();
+render();
+</script>
+</body>
+</html>
