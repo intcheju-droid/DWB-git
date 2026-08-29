@@ -41,7 +41,10 @@ const ORG_LINKS = [
   { name: '탐라장애인주간보호시설',
     desc: '성인 장애인 주간보호 · 제주',
     color: '#d9a406',
-    url: 'http://wbs.or.kr' },
+    url: 'http://wbs.or.kr',
+    sub: { name: '소식지 「함께 걷는 탐라」',
+           desc: '소리로 듣기·PDF 제공',
+           url: 'https://tamnajeju.or.kr' } },
   { name: '한국장애인주간이용시설협회',
     desc: '전국 주간이용시설 협회',
     color: '#e05f8f',
@@ -425,9 +428,17 @@ function indexPage(articles){
   var orgBox = '<div class="box"><h3>함께하는 단체·시설</h3>'
     + '<ul style="list-style:none;margin:0;padding:0">'
     + ORG_LINKS.map(function(l){
+        var subLine = '';
+        if(l.sub){
+          subLine = '<div style="margin-top:.35rem;padding-top:.3rem;border-top:1px dashed var(--line);font-size:.88em">'
+            + '<a href="' + esc(l.sub.url) + '" target="_blank" rel="noopener">' + esc(l.sub.name) + '</a>'
+            + (l.sub.desc ? '<br><span style="font-size:.86em;color:var(--sub)">' + esc(l.sub.desc) + '</span>' : '')
+            + '</div>';
+        }
         return '<li style="margin:.5rem 0;border-left:5px solid ' + l.color + ';padding:.15rem 0 .15rem .6rem">'
           + '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.name) + '</a>'
-          + '<br><span style="font-size:.82em;color:var(--sub)">' + esc(l.desc) + '</span></li>';
+          + '<br><span style="font-size:.82em;color:var(--sub)">' + esc(l.desc) + '</span>'
+          + subLine + '</li>';
       }).join('')
     + '</ul><p style="font-size:.78em;color:var(--sub);margin-top:.4rem">외부 기관 사이트가 새 창으로 열립니다.</p></div>';
   var content =
