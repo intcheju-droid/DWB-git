@@ -214,18 +214,21 @@ function indexPage(articles){
       + '</ul></div>';
   }
   /* 대표사진 자리 카드뉴스 v2 — 두 갈래.
-   * ① 헤드라인 기사에 card1~card6(+cardTitle)이 있으면 그 기사의 카드뉴스.
+   * ① 최신 브리핑의 card1~3 + 본문 섹션 항목 제목으로 자동 구성. (기본값 — 매일 아침 갱신)
+   * ② 브리핑이 하나도 없을 때만, 헤드라인 기사에 card1~card6(+cardTitle)이 있으면 그 기사의 카드뉴스.
    *    카드 형식: "본문 | 꼬리표 | 판정 | 유형" (유형: 문장(기본)/숫자/비교/인용, 본문 안의 보조 정보는 ';;'로 구분)
    *    예) card4: 0.04%;;부연 문장 | 다섯 달의 성적표 | 확인·복수 | 숫자
    *        card5: 라벨:93.6;;라벨:67.7;;각주 | 연계율 | 확인·복수 | 비교
-   * ② 없으면 최신 브리핑의 card1~3 + 본문 섹션 제목으로 자동 구성.
+   *    ※ 2026. 9. 2. 우선순위를 뒤집음. 그 전에는 기획기사 카드가 우선이라, 카드를 단 기획기사가
+   *      한 번 올라오면 그 뒤로 아무리 새 브리핑이 나와도 메인 카드가 그 기사에 묶여 갱신되지 않았다.
+   *      기획기사의 card1~card6은 그대로 두되 그 기사 안에서만 쓰인다.
    * 공통(v2 규격): 상단 제호+쪽번호, 하단 진행 점, 숫자 카드는 골드 반전.
    * 자동 넘김 8초, 일시정지/이전/다음, hover·focus 멈춤, prefers-reduced-motion이면 수동만, 한 바퀴 후 자동 정지.
    * 헤드라인 기사에 대표사진이 있으면 사진이 우선. */
   var deck = '';
   var deckSlides = null, deckSlug = null;
   function dparts(str){ return String(str).split(';;').map(function(x){ return x.trim(); }); }
-  if(hm.card1){
+  if(hm.card1 && !briefs.length){
     var ac = [];
     for(var ci = 1; ci <= 6; ci++){
       if(hm['card' + ci]){
@@ -248,8 +251,10 @@ function indexPage(articles){
       b0.body.split('\n').forEach(function(line){
         var h = line.match(/^## (.+)/);
         if(h){ curSec = h[1].trim(); return; }
-        var m = line.match(/^\*\*(.+?)\*\*/);
-        if(m && curSec){ (st[curSec] = st[curSec] || []).push(m[1].replace(/<[^>]+>/g, '').trim()); }
+        /* 항목 제목은 '### 제목'(권장, h3로 렌더됨) 또는 '**제목**' 둘 다 읽는다.
+         * 2026. 9. 2. 이전에는 '**제목**'만 읽어, ###을 쓰는 브리핑에서 세 장이 빈 카드로 나왔다. */
+        var m = line.match(/^### (.+)/) || line.match(/^\*\*(.+?)\*\*/);
+        if(m && curSec){ (st[curSec] = st[curSec] || []).push(m[1].replace(/<[^>]+>/g, '').replace(/\*\*/g, '').trim()); }
       });
       deckSlides = [{ type: 'cover', big: '장애인복지<br>아침 브리핑', sub: fmtDate(bm0.date) + ' · 카드 8장' }];
       three.forEach(function(c, i){
