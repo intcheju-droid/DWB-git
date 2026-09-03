@@ -450,6 +450,7 @@ function indexPage(articles){
     '<nav class="gnb" aria-label="주 메뉴"><ul>'
     + '<li><a href="index.html" aria-current="page">홈</a></li>'
     + '<li><a href="index.html#briefing">브리핑</a></li>'
+    + '<li><a href="events/index.html">행사 달력</a></li>'
     + ['복지','인권','제주','기획·연재','쉬운뉴스','오피니언'].map(function(c){ return '<li><a href="index.html#list">' + c + '</a></li>'; }).join('')
     + '</ul></nav>\n'
     + '<main id="main" class="wrap">\n<div class="grid">\n<section aria-label="주요 기사">\n'
